@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>容器云平台-Admin</title>
+    <link rel="shortcut icon" href="assets/images/favicon.png">
+    <link rel="stylesheet" href="assets/css/fonts/linecons/css/linecons.css">
+    <link rel="stylesheet" href="assets/css/fonts/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/xenon-core.css">
+    <link rel="stylesheet" href="assets/css/xenon-forms.css">
+    <link rel="stylesheet" href="assets/css/xenon-components.css">
+    <link rel="stylesheet" href="assets/css/xenon-skins.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
+    <link rel="stylesheet" href="assets/js/layer-v3.1.0/layer/theme/default/layer.css">
+
+    <script src="assets/js/jquery-1.11.1.min.js"></script>
+    <script src="assets/js/layer-v3.1.0/layer/layer.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="assets/js/html5shiv.min.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+    <style>
+
+        .login-page.login-light{
+            background: #fff;
+            color: #777;
+        }
+        .login-page {
+            background: #2c2e2f;
+            color: #fff;
+            padding-top: 0;
+        }
+        .login-page .errors-container {
+            margin-bottom: 20px;
+            padding: 0 30px;
+        }
+        .login-page .login-form {
+            position: relative;
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+        .login-page .login-form .form-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .login-page .login-form .form-group label.error {
+            position: absolute;
+            top: 24px;
+            right: 0;
+            bottom: 0;
+            padding-right: 12px;
+            font-size: 12px;
+            line-height: 40px;
+            color: rgba(151, 152, 152, 0.8);
+        }
+        .dropdown-menu a {
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+            margin: 2px
+        }
+    </style>
+
+</head>
+<body class="page-body" style="overflow-x: hidden">
+<div class="settings-pane">
+    <a href="#" data-toggle="settings-pane" data-animate="true">
+        &times;
+    </a>
+</div>
+<div class="page-container">
+    <div class="sidebar-menu toggle-others fixed">
+
+        <div class="sidebar-menu-inner">
+
+            <header class="logo-env">
+
+                <!-- logo -->
+                <div class="logo">
+                    <a href="/user_list" class="logo-expanded">
+                        <i class="fa fa-cloud" style="color: #fff;font-size: 20px;"></i>
+                        <img src="assets/images/logo1.png" alt="" style="width: 180px;height: 30px;margin-top: -10px"/>
+                    </a>
+
+                    <a href="/user_list" class="logo-collapsed">
+                        <i class="fa fa-cloud" style="color: #fff;font-size: 20px;;margin-top:10px"></i>
+
+                    </a>
+                </div>
+
+                <!-- This will toggle the mobile menu and will be visible only on mobile devices -->
+                <div class="mobile-menu-toggle visible-xs">
+                    <a href="#" data-toggle="user-info-menu">
+                        <i class="fa fa-user"></i>
+                    </a>
+
+                    <a href="#" data-toggle="mobile-menu">
+                        <i class="fa-bars"></i>
+                    </a>
+                </div>
+            </header>
+
+
+
+            <ul id="main-menu" class="main-menu">
+                <li class="active">
+                    <a href="/user_list">
+                        <i class="linecons-database" style="font-size: 16px"></i>
+                        <span class="title" >用户列表</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/container_list">
+                        <i class="linecons-doc" style="font-size: 16px"></i>
+                        <span class="title" >容器列表</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin_list">
+                        <i class="linecons-params" style="font-size: 16px"></i>
+                        <span class="title">管理员列表</span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+
+    </div>
+
+    <div class="main-content">
+
+        <!-- User Info, Notifications and Menu Bar -->
+        <nav class="navbar user-info-navbar" role="navigation">
+
+            <!-- Left links for user info navbar -->
+            <ul class="user-info-menu left-links list-inline list-unstyled">
+                <li class="hidden-sm hidden-xs">
+                    <a href="#" data-toggle="sidebar">
+                        <i class="fa-bars"></i>
+                    </a>
+                </li>
+            </ul>
+            <!-- Right links for user info navbar -->
+            <ul class="user-info-menu right-links list-inline list-unstyled">
+                <li class="search-form"><!-- You can add "always-visible" to show make the search input visible -->
+
+                    <form>
+                        <input style="display:none" type="text" name="s" class="form-control search-field" placeholder="搜索" />
+
+                        <button type="button" class="btn btn-link">
+                            <i class="linecons-user"></i>
+                        </button>
+                    </form>
+
+                </li>
+
+                <li class="dropdown user-profile">
+                    <a href="#" data-toggle="dropdown">
+							<span style="display: inherit">
+								<span style="color: rgb(141,193,43)" id="self"></span>
+								<i class="fa-angle-down"></i>
+							</span>
+                    </a>
+
+                    <ul class="dropdown-menu user-profile-menu list-unstyled">
+                        <li class="last">
+                            <a href="/logout">
+                                <i class="fa-lock"></i>
+                                退出登录
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+
+            </ul>
+
+        </nav>
+
+        <script type="text/javascript">
+            jQuery(document).ready(function($)
+            {
+                // Realtime Network Stats
+                var i = 0,
+                    rns_values = [130,150],
+                    rns2_values = [39,50],
+                    realtime_network_stats = [];
+
+                for(i=0; i<=100; i++)
+                {
+                    realtime_network_stats.push({ id: i, x1: between(rns_values[0], rns_values[1]), x2: between(rns2_values[0], rns2_values[1])});
+                }
+
+
+
+
+                function between(randNumMin, randNumMax)
+                {
+                    var randInt = Math.floor((Math.random() * ((randNumMax + 1) - randNumMin)) + randNumMin);
+
+                    return randInt;
+                }
+            });
+        </script>
+
+        <div class="row">
+            <div class="col-sm-10 col-sm-offset-1">
+                <div class="chart-item-bg">
+                    <div class="panel-body">
+                        <div style="margin-bottom: 15px">
+                            <div class="h3 text-secondary text-bold">
+                                用户列表
+                                <span style="margin-left: 5px" class="text-medium text-muted">User List</span>
+                                <button  onclick="addUser()"  style="float:right;position: absolute;top:32px;left: 190px" class="btn btn-info"><i class="fa fa-plus"></i>新增用户</button>
+
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+                            jQuery(document).ready(function($)
+                            {
+                                $("#example-2").dataTable({
+                                    "sDom": '<"top"f>t<"bottom"pi>',
+                                    "bSort": false, //排序功能
+                                    "pageLength":9,
+//                                    searching: false,
+                                    "ajax": {
+                                        "url":"/user",
+                                        "dataType":"json",
+                                        "method":"GET",
+                                        "data":{
+                                            roleName: "用户"
+                                        },
+                                        "dataSrc":
+                                            function(result){
+                                                return result.extend;//自定义数据源，默认为data
+                                            },
+                                    },
+                                    "columns": [
+                                        {  "data":"userId",
+                                            "title": "ID"
+                                        },
+                                        {
+                                            "data":"userName",
+                                            "title":"用户名称"
+                                        },
+                                        {
+                                            "data":"teamName",
+                                            "title":"团队名称"
+                                        },
+                                        {
+                                            "data":"userPhone",
+                                            "title":"联系方式"
+                                        },
+                                        {
+                                            "title":"操作"
+                                        }],
+                                    "aoColumnDefs":[
+                                        {
+                                            "targets": -1,
+                                            "class": "but_xq",
+                                            "data": null,
+                                            "bSortable": false,
+                                            "defaultContent": "<a id='delUser' onclick='delUser(this)'  class=\"btn btn-danger btn-sm btn-icon icon-left\" style=\"margin: 2px\">删除</a> <a onclick='updateUser(this)'   class=\"btn btn-info btn-sm btn-icon icon-left\" style=\"margin: 2px\">修改</a>   <div  style='margin-left:2px;margin-right: 6px' class=\"btn-group\">\n" +
+                                            "                            <button type=\"button\" class=\"btn btn-default btn-sm btn-orange btn-icon icon-left dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
+                                            "                                新增容器 <span class=\"caret\"></span>\n" +
+                                            "                            </button>\n" +
+                                            "                            <ul class=\"dropdown-menu\">\n" +
+                                            "                                <li><a onclick=\"addContainer(this)\">10.2.132.171:5000/tomcat:1.0</a></li>\n" +
+                                            "                                <li><a onclick=\"addContainer(this)\">10.2.132.171:5000/mysql:1.0</a></li>\n" +
+                                            "                                <li><a onclick=\"addContainer(this)\">10.2.132.171:5000/php:1.0</a></li>\n" +
+                                            "                            </ul>\n" +
+                                            "                        </div><a id='lookProgramme' onclick=\"lookProgramme(this)\"  class=\"btn btn-secondary btn-sm btn-icon icon-left\" style=\"margin: 2px\">用户容器</a>"
+                                        }],
+                                    language: {
+                                        "sProcessing": "处理中...",
+                                        "sLengthMenu": "显示 _MENU_ 项结果",
+                                        "sZeroRecords": "没有匹配结果",
+                                        "sInfo": " 共 _TOTAL_ 项",
+                                        "sInfoEmpty": " 共 0 项",
+                                        "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                                        "sInfoPostFix": "",
+                                        "sSearch": "搜索:",
+                                        "sUrl": "",
+                                        "sEmptyTable": "表中数据为空",
+                                        "sLoadingRecords": "载入中...",
+                                        "sInfoThousands": ",",
+                                        "oPaginate": {
+                                            "sFirst": "首页",
+                                            "sPrevious": "<",
+                                            "sNext": ">",
+                                            "sLast": "末页"
+                                        },
+                                        "oAria": {
+                                            "sSortAscending": ": 以升序排列此列",
+                                            "sSortDescending": ": 以降序排列此列"
+                                        }
+                                    }
+                                });
+
+
+                            });
+                        </script>
+                        <div class="table-responsive" style="border: none">
+                            <table  width="100%" class="table table-bordered table-striped" id="example-2">
+                                <tbody class="middle-align"></tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="page-loading-overlay">
+    <div class="loader-2"></div>
+</div>
+
+
+<!--模态框修改用户-->
+<div class="modal fade " id="modal-updateUser">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">修改用户信息</h4>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="login-container login-page login-light">
+                    <script>
+                        jQuery(document).ready(function($) {
+//
+                            setTimeout(function () {
+                                $(".fade-in-effect").addClass('in');
+                            }, 1);
+
+                            $("form#userForm").validate({
+                                debug: true, //调试模式取消submit的默认提交功能
+                                rules: {
+                                    userPhone: {
+                                        required: true,
+                                        digits: true,
+                                        rangelength: [11, 11]
+                                    },
+                                    teamName: {
+                                        required: true,
+                                        stringNormalCheck: true
+                                    },
+                                    userPassword: {
+                                        required: true,
+                                        minlength: 6,
+                                        isPwd: true
+                                    }
+                                },
+
+                                messages: {
+                                    userPhone: {
+                                        required: '请输入联系方式',
+                                        digits: '请正确填写您的联系方式',
+                                        rangelength: '手机号为11位'
+                                    },
+                                    teamName: {
+                                        required: '请输入团队名称'
+                                    },
+                                    userPassword: {
+                                        required: '请输入密码',
+                                        minlength: "密码不能小于6个字符"
+                                    }
+                                },
+
+                                // Form Processing via AJAX
+                                submitHandler: function (form) {
+                                    show_loading_bar(70); // Fill progress bar to 70% (just a given value)
+
+                                    var opts = {
+                                        "closeButton": true,
+                                        "debug": false,
+                                        "positionClass": "toast-top-full-width",
+                                        "onclick": null,
+                                        "showDuration": "300",
+                                        "hideDuration": "1000",
+                                        "timeOut": "5000",
+                                        "extendedTimeOut": "1000",
+                                        "showEasing": "swing",
+                                        "hideEasing": "linear",
+                                        "showMethod": "fadeIn",
+                                        "hideMethod": "fadeOut"
+                                    };
+
+                                    $.ajax({
+                                        url: "/user/" + $(form).find('#userid').val(),
+                                        method: 'PUT',
+                                        dataType: 'json',
+                                        data: {
+                                            userName: $(form).find('#username').val(),
+                                            teamName: $(form).find('#teamname').val(),
+                                            userClass: $(form).find('#userclass').val(),
+                                            userPhone: $(form).find('#userphone').val(),
+                                            userPassword: $(form).find('#userpassword').val()
+                                        },
+                                        success: function (resp) {
+                                            show_loading_bar({
+                                                delay: .5,
+                                                pct: 100,
+                                                finish: function () {
+
+                                                    // Redirect after successful login page (when progress bar reaches 100%)
+                                                    if (resp.code==100) {
+                                                        layer.msg(" 保存成功！",{time: 1000, icon:1,end:function(){
+                                                            window.location.href = '/user_list';}});
+                                                    }
+                                                }
+                                            });
+
+
+                                            // Remove any alert
+                                            $(".errors-container .alert").slideUp('fast');
+                                        }
+                                    });
+
+                                }
+                            });
+                        })
+                    </script>
+                    <!-- Errors container -->
+
+                    <div class="errors-container">
+
+
+                    </div>
+                    <form role="form" method="post" id="userForm" class="login-form fade-in-effect">
+                        <div class="form-group" style="display: none">
+                            <label class="control-label2" for="userid">id</label>
+                            <input disabled style="cursor: not-allowed"  type="text" class="form-control" name="userId" id="userid" autocomplete="off" />
+                        </div>
+
+                        <div class="form-group">
+                            <label disabled style="cursor: not-allowed"  class="control-label2" for="username">用户名</label>
+                            <input disabled style="cursor: not-allowed"  type="text" class="form-control" name="userName" id="username" autocomplete="off" />
+                        </div>
+
+                        <div class="form-group">
+                            <label disabled style="cursor: not-allowed"  class="control-label2" for="userclass">班级</label>
+                            <input disabled style="cursor: not-allowed"  type="text" class="form-control" name="userClass" id="userclass" autocomplete="off" />
+                        </div>
+
+                        <!--<div class="form-group">-->
+                        <!--<label class="control-label" for="passwd">密码</label>-->
+                        <!--<input disabled type="password" class="form-control" name="passwd" id="passwd" autocomplete="off" />-->
+                        <!--</div>-->
+
+                        <div class="form-group">
+                            <label id="teamnameT" class="control-label2" for="teamname">团队名称</label>
+                            <input  type="text" class="form-control" name="teamName" id="teamname" autocomplete="off" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label2" for="userpassword">密码</label>
+                            <input type="password" class="form-control" name="userPassword" id="userpassword" autocomplete="off" />
+                        </div>
+                        <div class="form-group">
+                            <label id="userphoneT" class="control-label2" for="userphone">联系方式</label>
+                            <input type="text" class="form-control" name="userPhone" id="userphone" autocomplete="off" />
+                        </div>
+
+                        <div class="form-group" style="float: right">
+                            <button type="button" onclick="window.location.reload()" class="btn btn-white" data-dismiss="modal">取消</button>
+                            <button type="submit" class="btn btn-info"> <i class="fa-lock" style="margin-right: 5px"></i>保存信息</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<!--模态框新增用户-->
+<div class="modal fade " id="modal-addUser">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">新增用户信息</h4>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="login-container login-light login-page">
+                    <script>
+                        jQuery(document).ready(function($) {
+//
+                            setTimeout(function () {
+                                $(".fade-in-effect").addClass('in');
+                            }, 1);
+
+                            $("form#newUserForm").validate({
+                                rules: {
+                                    userName: {
+                                        required: true,
+                                        stringCheck:true,
+                                        remote: {
+                                            url: "/check/userName",     //后台处理程序
+                                            type: "POST",               //数据发送方式
+                                            dataType: "json",           //接受数据格式
+                                            data: {                     //要传递的数据
+                                                userName: function() {
+                                                    return $("#newUserName").val();
+                                                }
+                                            }
+                                        }
+                                    },
+                                    userPassword: {
+                                        required: true,
+                                        minlength: 6,
+                                        isPwd:true
+                                    },
+                                    passwd2: {
+                                        required: true,
+                                        minlength: 6,
+                                        equalTo: "#newUserpasswd"
+                                    },
+                                    teamName: {
+                                        required: true,
+                                        stringNormalCheck: true
+                                    },
+                                    userClass: {
+                                        required: true,
+                                        stringNormalCheck: true
+                                    },
+                                    userPhone: {
+                                        required:true,
+                                        digits:true,
+                                        rangelength:[11,11]
+                                    }
+                                },
+
+                                messages: {
+                                    userName: {
+                                        required: '请输入用户名',
+                                        remote:'用户名已存在'
+                                    },
+
+                                    userPassword: {
+                                        required: '请输入密码',
+                                        minlength: "密码不能小于6个字符"
+                                    },
+                                    passwd2: {
+                                        required: '请再次输入密码',
+                                        minlength: "密码不能小于6个字符",
+                                        equalTo: "两次输入密码不一致"
+                                    },
+                                    teamName: {
+                                        required: '请输入团队名称'
+                                    },
+                                    userClass: {
+                                        required: '请输入班级'
+                                    },
+                                    userPhone: {
+                                        required: '请输入联系方式',
+                                        digits:'请正确填写您的联系方式',
+                                        rangelength:'手机号为11位'
+                                    }
+                                },
+
+                                // Form Processing via AJAX
+                                submitHandler: function (form) {
+                                    show_loading_bar(70); // Fill progress bar to 70% (just a given value)
+
+                                    var opts = {
+                                        "closeButton": true,
+                                        "debug": false,
+                                        "positionClass": "toast-top-full-width",
+                                        "onclick": null,
+                                        "showDuration": "300",
+                                        "hideDuration": "1000",
+                                        "timeOut": "5000",
+                                        "extendedTimeOut": "1000",
+                                        "showEasing": "swing",
+                                        "hideEasing": "linear",
+                                        "showMethod": "fadeIn",
+                                        "hideMethod": "fadeOut"
+                                    };
+
+                                    $.ajax({
+                                        url:"/user/register",
+                                        dataType:"json",
+                                        method:"POST",
+                                        data: {
+                                            do_login: true,
+                                            roleId: 2,
+                                            userName: $(form).find('#newUserName').val(),
+                                            userPassword: $(form).find('#newUserpasswd').val(),
+                                            usePhone: $(form).find('#newUserphone').val(),
+                                            teamName: $(form).find('#newTeamname').val(),
+                                            userClass: $(form).find('#newUserclass').val(),
+                                        },
+                                        success: function (resp) {
+                                            show_loading_bar({
+                                                delay: .5,
+                                                pct: 100,
+                                                finish: function () {
+
+                                                    // Redirect after successful login page (when progress bar reaches 100%)
+                                                    if (resp.code == 100) {
+                                                        layer.msg("保存成功！")
+                                                        window.location.href = '/user_list';
+                                                    }
+                                                }
+                                            });
+
+
+                                            // Remove any alert
+                                            $(".errors-container .alert").slideUp('fast');
+
+                                            // Show errors
+                                            if (resp.code == 100) {
+                                                $(".errors-container").html('<div class="alert alert-success">\
+												<button type="button" class="close" data-dismiss="alert">\
+													<span aria-hidden="true">&times;</span>\
+													<span class="sr-only">取消</span>\
+												</button>\
+												' + resp.msg + '\
+											</div>');
+                                            }else{
+                                                $(".errors-container").html('<div class="alert alert-danger">\
+												<button type="button" class="close" data-dismiss="alert">\
+													<span aria-hidden="true">&times;</span>\
+													<span class="sr-only">取消</span>\
+												</button>\
+												' + "服务器异常" + '\
+											</div>');
+                                            }
+
+
+                                            $(".errors-container .alert").hide().slideDown();
+                                            $(form).find('#newUserName').select();
+
+                                        }
+                                    });
+
+                                }
+                            });
+                        })
+                    </script>
+                    <!-- Errors container -->
+
+                    <div class="errors-container">
+
+
+                    </div>
+                    <form role="form" method="post" id="newUserForm" class="login-form fade-in-effect">
+
+                        <div class="form-group">
+                            <label   class="control-label2" for="newUserName">用户名</label>
+                            <input  type="text" class="form-control" name="userName" id="newUserName" autocomplete="off" />
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label2" for="newUserpasswd">密码</label>
+                            <input  type="password" class="form-control" name="userPassword" id="newUserpasswd" autocomplete="off" />
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label2" for="passwd2">再次输入密码</label>
+                            <input type="password" class="form-control" name="passwd2" id="passwd2" autocomplete="off" />
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label2" for="teamName">团队名称</label>
+                            <input type="text" class="form-control" name="teamName" id="newTeamname" autocomplete="off" />
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label2" for="userClass">班级</label>
+                            <input type="text" class="form-control" name="userClass" id="newUserclass" autocomplete="off" />
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label2" for="userphone">联系方式</label>
+                            <input type="text" class="form-control" name="userPhone" id="newUserphone" autocomplete="off" />
+                        </div>
+
+                        <div class="form-group" style="float: right">
+                            <button type="button" onclick="window.location.reload()" class="btn btn-white" data-dismiss="modal">取消</button>
+                            <button type="submit" class="btn btn-info"> <i class="fa-lock" style="margin-right: 5px"></i>保存信息</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<!-- Bottom Scripts -->
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/TweenMax.min.js"></script>
+<script src="assets/js/resizeable.js"></script>
+<script src="assets/js/joinable.js"></script>
+<script src="assets/js/xenon-api.js"></script>
+<script src="assets/js/xenon-toggles.js"></script>
+
+
+<!-- Imported scripts on this page -->
+<script src="assets/js/xenon-widgets.js"></script>
+<script src="assets/js/devexpress-web-14.1/js/globalize.min.js"></script>
+<script src="assets/js/devexpress-web-14.1/js/dx.chartjs.js"></script>
+<script src="assets/js/toastr/toastr.min.js"></script>
+
+
+
+<!-- Imported styles on this page -->
+<link rel="stylesheet" href="assets/js/datatables/dataTables.bootstrap.css">
+<script src="assets/js/datatables/js/jquery.dataTables.min.js"></script>
+<script src="assets/js/jquery-validate/jquery.validate.min.js"></script>
+<script src="assets/js/jquery-validate/additional-methods.js"></script>
+<!-- Imported scripts on this page -->
+<script src="assets/js/datatables/dataTables.bootstrap.js"></script>
+<script src="assets/js/datatables/yadcf/jquery.dataTables.yadcf.js"></script>
+<script src="assets/js/datatables/tabletools/dataTables.tableTools.min.js"></script>
+
+
+<!-- JavaScripts initializations and stuff -->
+<script src="assets/js/xenon-custom.js"></script>
+
+<script src="assets/js/xenon-custom.js"></script>
+<script>
+    function delUser(btn) {
+        var id =btn.parentNode.parentNode.firstChild.textContent;
+        //获取查看行的id
+//        alert(data)
+        layer.confirm('确认删除？', {
+            skin: 'layui-layer-lan',
+            btn: ['确认','取消'] //按钮
+        }, function(){
+            $.ajax({
+                url:'/deleteUser',
+                data:{
+                    userId: id
+                },
+                type:"post",
+                async:false,
+                dataType:"json",
+                success:function(data){
+                    if(data.code==100){
+                        layer.msg('已删除',{time: 1000,end:function(){
+                            window.location.reload();}});
+                    }else{
+
+                    }
+                },
+                error:function () {
+                    layer.msg('删除失败')
+                }
+            });
+        }, function(){
+            layer.msg('已取消')
+        });
+
+    }
+    function updateUser(btn) {
+
+        var id =btn.parentNode.parentNode.firstChild.textContent;
+        //获取查看行的id
+//        alert(data)
+        $.ajax({
+            url : "/user/" + id,
+            type : "GET",
+            dataType : "json",
+            success : function (res) {
+//                alert(res.data[id].teamName)
+                jQuery('#modal-updateUser').modal('show', {backdrop: 'static'});
+                $('#userid').val(res.extend.userId);
+                $('#teamname').val(res.extend.teamName);
+                $('#userclass').val(res.extend.userClass);
+                $('#userphone').val(res.extend.userPhone);
+                $('#username').val(res.extend.userName);
+                $('#userpassword').val(res.extend.userPassword);
+
+            }
+        })
+
+    }//获取到返回对应用户值 并显示
+    function addContainer(btn) {
+        var dataImage =btn.parentNode.firstChild.textContent;
+        var id =btn.parentNode.parentNode.parentNode.parentNode.parentNode.firstChild.textContent;
+        var type = 0;
+        if(dataImage == "10.2.132.171:5000/tomcat:1.0"){
+            type = 1;
+        }else if(dataImage == "10.2.132.171:5000/php:1.0"){
+            type = 2;
+        }else if(dataImage == "10.2.132.171:5000/mysql:1.0"){
+            type = 5;
+        }
+
+        layer.confirm('确认新增'+dataImage+'容器？', {
+            skin: 'layui-layer-lan',
+            btn: ['确认','取消'] //按钮
+
+        }, function(){
+            $.ajax({
+                url:'/container',
+                data:{
+                    userId: id,
+                    image: dataImage,
+                    containerType: type
+                },
+                type:"post",
+                async:false,
+                dataType:"json",
+                success:function(data){
+                    if(data.code==100){
+                        layer.msg('已新增容器')
+                    }else{
+                    }
+                },
+                error:function () {
+                    layer.msg('失败')
+                }
+            });
+        }, function(){
+            layer.msg('已取消')
+        });
+
+    }
+    function lookProgramme(btn) {
+        var userId = btn.parentNode.parentNode.firstChild.textContent;
+        window.location.href = '/user_container_list?userId=' + userId
+    }
+    function addUser() {
+        $.ajax({
+            url: "/check/host",
+            method: 'POST',
+            dataType: 'json',
+            data:"",
+            success:function (resp) {
+                if(resp.code==100){
+                    jQuery('#modal-addUser').modal('show', {backdrop: 'static'});
+                }else if (resp.code == 200) {
+                    layer.msg("资源已全部被占用");
+
+                }
+            }
+        })
+
+    }
+
+    function getUserSession() {
+        var value = "";
+        $.ajax({
+            url: "/session/user",
+            method: 'GET',
+            dataType: 'json',
+            async: false,
+            success: function (resp) {
+                if (resp.code == 100) {
+                    value = resp.extend;
+                }
+            }
+        });
+        return value;
+    }
+
+    $("#self").text(getUserSession().userName);
+</script>
+</body>
+</html>

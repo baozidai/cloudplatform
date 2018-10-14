@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.cloud.platform.dao.ProjectMapper">
+
+    <select id="getProjectAddressByProjectId" resultType="java.lang.String">
+        SELECT project_address
+        FROM project
+        WHERE project_id = #{projectId,jdbcType=INTEGER}
+    </select>
+
+    <select id="getProjectByPodName" resultType="project">
+        SELECT *
+        FROM project
+        WHERE pod_name = #{podName,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getProjectByProjectId" resultType="team.cloud.platform.entity.Project">
+        SELECT *
+        FROM project
+        WHERE project_id = #{projectId,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteProjectByProjectId">
+        DELETE FROM project
+        WHERE project_id = #{projectId,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insertProject" useGeneratedKeys="true" keyProperty="project_id" parameterType="project">
+        INSERT INTO project (
+            pod_name,
+            project_name,
+            project_address
+        ) VALUES (
+            #{podName,jdbcType=VARCHAR},
+            #{projectName,jdbcType=VARCHAR},
+            #{projectAddress,jdbcType=VARCHAR}
+        )
+    </insert>
+
+</mapper>

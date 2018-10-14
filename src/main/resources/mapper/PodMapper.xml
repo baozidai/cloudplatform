@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.cloud.platform.dao.PodMapper">
+
+    <insert id="insertPod" useGeneratedKeys="true" keyProperty="pod_id" parameterType="pod">
+    INSERT INTO pod (
+    user_id,
+    ip_port, pod_name,name,
+    type, image, dir_src, start_time, end_time, exist
+    ) VALUES (
+    #{userId,jdbcType=INTEGER},
+    #{ipPort,jdbcType=VARCHAR}, #{podName,jdbcType=VARCHAR},
+    #{name,jdbcType=VARCHAR},
+    #{type,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR},
+    #{dirSrc,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP},
+    #{endTime,jdbcType=TIMESTAMP}, #{exist,jdbcType=BOOLEAN}
+    )
+    </insert>
+
+    <update id="updateNameByPodId">
+        UPDATE pod
+        SET name = #{name,jdbcType=VARCHAR}
+        where pod_id = #{podId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateIpPortByPodName">
+        UPDATE pod
+        SET ip_port = #{ipPort,jdbcType=VARCHAR}
+        where pod_name = #{podName,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateExistByPodId">
+        UPDATE pod
+        SET exist = #{exist,jdbcType=BOOLEAN}
+        where pod_id = #{podId,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deletePodByPodId">
+        DELETE FROM pod
+        WHERE pod_id = #{podId,jdbcType=INTEGER}
+    </delete>
+
+    <select id="listAllPod" resultType="pod">
+        SELECT *
+        FROM pod
+    </select>
+
+    <select id="listPodByUserIdAndType" resultType="pod">
+        SELECT *
+        FROM pod
+        WHERE
+            user_id = #{userId,jdbcType=INTEGER}
+            AND type = #{type,jdbcType=VARCHAR};
+    </select>
+
+    <select id="countPodByExist" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM pod
+        WHERE exist = #{exist,jdbcType=BOOLEAN}
+    </select>
+
+    <select id="listPodIdByUserId" resultType="java.lang.Integer">
+        SELECT pod_id
+        FROM pod
+        WHERE user_id = #{userId,jdbcType=INTEGER}
+    </select>
+
+    <select id="countPodByUserIdAndType" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM pod
+        WHERE user_id = #{userId,jdbcType=INTEGER}
+              AND type = #{type,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getExistByPodId" resultType="java.lang.Boolean">
+        SELECT exist
+        FROM pod
+        WHERE pod_id = #{podId,jdbcType=INTEGER}
+    </select>
+
+    <select id="getDirSrcByPodId" resultType="java.lang.String">
+        SELECT dir_src
+        FROM pod
+        WHERE pod_id = #{podId,jdbcType=INTEGER}
+    </select>
+
+    <select id="getPodByPodId" resultType="pod">
+        SELECT *
+        FROM pod
+        WHERE  pod_id = #{podId,jdbcType=INTEGER}
+    </select>
+</mapper>

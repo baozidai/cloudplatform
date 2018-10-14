@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="team.cloud.platform.dao.UserMapper">
+
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="user_id" parameterType="user">
+        INSERT INTO user (
+        user_name,user_password,team_name,user_phone,user_class
+        ) VALUES (
+        #{userName,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR},
+        #{teamName,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, #{userClass,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <delete id="deleteUserByUserId">
+        DELETE FROM user
+        WHERE user_id = #{userId,jdbcType=INTEGER}
+    </delete>
+
+    <select id="listAllUser" resultType="user">
+        SELECT * FROM user
+    </select>
+
+    <select id="getUserByUserName" resultType="user">
+        SELECT *
+        FROM user
+        WHERE user_name = #{userName,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getUserByUserId" resultType="user">
+        SELECT *
+        FROM user
+        WHERE user_id = #{userId,jdbcType=INTEGER}
+    </select>
+
+
+    <select id="getUserByUserNameAndUserPassword" resultType="user">
+        SELECT *
+        FROM user
+        WHERE user_name = #{userName}
+        AND user_password = #{userPassword}
+    </select>
+
+    <update id="updateUserByUserId" parameterType="user">
+        UPDATE user
+        SET user_name = #{userName,jdbcType=VARCHAR},
+            team_name = #{teamName,jdbcType=VARCHAR},
+            user_class = #{userClass,jdbcType=VARCHAR},
+            user_phone = #{userPhone,jdbcType=VARCHAR},
+            user_password = #{userPassword,jdbcType=VARCHAR}
+        WHERE user_id = #{userId}
+    </update>
+</mapper>

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Xenon Boostrap Admin Panel"/>
+    <meta name="author" content=""/>
+
+    <title>容器云平台</title>
+    <link rel="shortcut icon" href="assets/images/favicon.png">
+    <link rel="stylesheet" href="assets/css/fonts/linecons/css/linecons.css">
+    <link rel="stylesheet" href="assets/css/fonts/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/xenon-core.css">
+    <link rel="stylesheet" href="assets/css/xenon-forms.css">
+    <link rel="stylesheet" href="assets/css/xenon-components.css">
+    <link rel="stylesheet" href="assets/css/xenon-skins.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
+    <link rel="stylesheet" href="assets/js/layer-v3.1.0/layer/theme/default/layer.css">
+    <script src="assets/js/jquery-1.11.1.min.js"></script>
+    <script src="assets/js/layer-v3.1.0/layer/layer.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="assets/js/html5shiv.min.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+    <style>
+
+        .login-page.login-light {
+            background: #fff;
+            color: #777;
+        }
+
+        .login-page {
+            background: #2c2e2f;
+            color: #fff;
+            padding-top: 0;
+        }
+
+        .login-page .errors-container {
+            margin-bottom: 20px;
+            padding: 0 30px;
+        }
+
+        .login-page .login-form {
+            position: relative;
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        .login-page .login-form .form-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .login-page .login-form .form-group label.error {
+            position: absolute;
+            top: 24px;
+            right: 0;
+            bottom: 0;
+            padding-right: 12px;
+            font-size: 12px;
+            line-height: 40px;
+            color: rgba(151, 152, 152, 0.8);
+        }
+
+    </style>
+
+</head>
+<body class="page-body" style="overflow-x: hidden;">
+
+<div class="page-container">
+    <div class="sidebar-menu toggle-others fixed">
+
+        <div class="sidebar-menu-inner">
+
+            <header class="logo-env">
+
+                <!-- logo -->
+                <div class="logo">
+                    <a href="/tomcat" class="logo-expanded">
+                        <i class="fa fa-cloud" style="color: #fff;font-size: 20px;"></i>
+                        <img src="assets/images/logo1.png" alt="" style="width: 180px;height: 30px;margin-top: -10px"/>
+                    </a>
+
+                    <a href="/tomcat" class="logo-collapsed">
+                        <i class="fa fa-cloud" style="color: #fff;font-size: 20px;;margin-top:10px"></i>
+
+                    </a>
+                </div>
+
+                <!-- This will toggle the mobile menu and will be visible only on mobile devices -->
+                <div class="mobile-menu-toggle visible-xs">
+                    <a href="#" data-toggle="user-info-menu">
+                        <i class="fa fa-user"></i>
+                    </a>
+
+                    <a href="#" data-toggle="mobile-menu">
+                        <i class="fa-bars"></i>
+                    </a>
+                </div>
+            </header>
+
+
+            <ul id="main-menu" class="main-menu">
+                <li>
+                    <a href="/tomcat">
+                        <i class="linecons-database" style="font-size: 16px"></i>
+                        <span class="title">静态网页及Java Web项目</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/net">
+                        <i class="linecons-doc" style="font-size: 16px"></i>
+                        <span class="title">.Net项目</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/python">
+                        <i class="linecons-database" style="font-size: 16px"></i>
+                        <span class="title">Python项目</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/php">
+                        <i class="linecons-doc" style="font-size: 16px"></i>
+                        <span class="title">PHP项目</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/mysql">
+                        <i class="linecons-params" style="font-size: 16px"></i>
+                        <span class="title">数据库地址</span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+
+    </div>
+
+    <div class="main-content">
+
+        <!-- User Info, Notifications and Menu Bar -->
+        <nav class="navbar user-info-navbar" role="navigation">
+
+            <!-- Left links for user info navbar -->
+            <ul class="user-info-menu left-links list-inline list-unstyled">
+                <li class="hidden-sm hidden-xs">
+                    <a href="#" data-toggle="sidebar">
+                        <i class="fa-bars"></i>
+                    </a>
+                </li>
+            </ul>
+            <!-- Right links for user info navbar -->
+            <ul class="user-info-menu right-links list-inline list-unstyled">
+
+                <li class="search-form"><!-- You can add "always-visible" to show make the search input visible -->
+
+                    <form>
+                        <input style="display:none" type="text" name="s" class="form-control search-field"
+                               placeholder="搜索"/>
+
+                        <button type="button" class="btn btn-link">
+                            <i class="linecons-user"></i>
+                        </button>
+                    </form>
+
+                </li>
+
+                <li class="dropdown user-profile">
+                    <a href="#" data-toggle="dropdown">
+							<span style="display: inherit">
+								<span style="color: rgb(141,193,43)" id="self"></span>
+								<i class="fa-angle-down"></i>
+							</span>
+                    </a>
+
+                    <ul class="dropdown-menu user-profile-menu list-unstyled">
+                        <li>
+                            <a href="/user_info">
+                                <i class="fa-user"></i>
+                                个人信息
+                            </a>
+                        </li>
+                        <li class="last">
+                            <a href="/logout">
+                                <i class="fa-lock"></i>
+                                退出登录
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+            </ul>
+
+        </nav>
+        <div class="page-title">
+
+            <div class="title-env">
+                <h2 class="title" style="font-size: 23px">个人信息</h2>
+                <p class="description">Personal Information</p>
+            </div>
+
+        </div>
+
+
+        <div class="login-container login-light login-page">
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">
+
+                    <div class="panel panel-default">
+
+                        <div class="panel-heading">
+                            <div class="panel-title">你的信息</div>
+                            <span style="font-size: 12px;margin-left: 5px">Your Message</span>
+                        </div>
+
+                        <div class="panel-body">
+                            <script>
+
+                                jQuery(document).ready(function ($) {
+//
+                                    var userId = getUserSession().userId;
+                                    $.ajax({
+                                        type: "GET",
+                                        url: "/user/" + userId,
+                                        dataType: "json",
+                                        success: function (resp) {
+                                            $('#userid').val(resp.extend.userId);
+                                            $('#teamname').val(resp.extend.teamName);
+                                            $('#userclass').val(resp.extend.userClass);
+                                            $('#userphone').val(resp.extend.userPhone);
+                                            $('#username').val(resp.extend.userName);
+                                            $('#userpassword').val(resp.extend.userPassword);
+                                        }
+                                    })
+
+                                    setTimeout(function () {
+                                        $(".fade-in-effect").addClass('in');
+                                    }, 1);
+
+                                    $("form#selfForm").validate({
+                                        debug: true, //调试模式取消submit的默认提交功能
+                                        rules: {
+                                            userPhone: {
+                                                required: true,
+                                                digits: true,
+                                                rangelength: [11, 11]
+                                            },
+                                            teamName: {
+                                                required: true,
+                                                stringNormalCheck: true
+                                            },
+                                            userClass: {
+                                                required: true,
+                                                stringNormalCheck: true
+                                            },
+                                            userPassword: {
+                                                required: true,
+                                                minlength: 6,
+                                                isPwd: true
+                                            },
+                                        },
+
+                                        messages: {
+                                            userPhone: {
+                                                required: '请输入联系方式',
+                                                digits: '请正确填写您的联系方式',
+                                                rangelength: '手机号为11位'
+                                            },
+                                            teamName: {
+                                                required: '请输入团队名称'
+                                            },
+                                            userClass: {
+                                                required: '请输入班级'
+                                            },
+                                            userPassword: {
+                                                required: '请输入密码',
+                                                minlength: "密码不能小于6个字符"
+                                            },
+                                        },
+
+                                        // Form Processing via AJAX
+                                        submitHandler: function (form) {
+                                            show_loading_bar(70); // Fill progress bar to 70% (just a given value)
+
+                                            var opts = {
+                                                "closeButton": true,
+                                                "debug": false,
+                                                "positionClass": "toast-top-full-width",
+                                                "onclick": null,
+                                                "showDuration": "300",
+                                                "hideDuration": "1000",
+                                                "timeOut": "5000",
+                                                "extendedTimeOut": "1000",
+                                                "showEasing": "swing",
+                                                "hideEasing": "linear",
+                                                "showMethod": "fadeIn",
+                                                "hideMethod": "fadeOut"
+                                            };
+
+                                            $.ajax({
+                                                url: "/user/" + userId,
+                                                method: 'PUT',
+                                                dataType: 'json',
+                                                data: {
+                                                    userName: $(form).find('#username').val(),
+                                                    userClass: $(form).find('#userclass').val(),
+                                                    teamName: $(form).find('#teamname').val(),
+                                                    userPhone: $(form).find('#userphone').val(),
+                                                    userPassword: $(form).find('#userpassword').val()
+                                                },
+                                                success: function (resp) {
+                                                    show_loading_bar({
+                                                        delay: .5,
+                                                        pct: 100,
+                                                        finish: function () {
+
+                                                            // Redirect after successful login page (when progress bar reaches 100%)
+                                                            if (resp.code == 100) {
+                                                                layer.msg(" 保存成功！", {
+                                                                    time: 1000, icon: 1, end: function () {
+                                                                        window.location.reload();
+                                                                    }
+                                                                });
+                                                            }
+                                                        }
+                                                    });
+
+
+                                                    // Remove any alert
+                                                    $(".errors-container .alert").slideUp('fast');
+
+                                                    // Show errors
+                                                }
+                                            });
+
+                                        }
+                                    });
+
+                                    // Set Form focus
+                                    $("form#selfForm .form-group:has(.form-control):first .form-control").focus();
+                                });
+                            </script>
+                            <div class="errors-container">
+                            </div>
+                            <form role="form" method="post" id="selfForm" class="login-form fade-in-effect">
+
+                                <div class="form-group" style="display: none">
+                                    <label class="control-label2" for="userid">id</label>
+                                    <input disabled style="cursor: not-allowed" type="text" class="form-control"
+                                           name="userId" id="userid" autocomplete="off"/>
+                                </div>
+                                <div class="form-group">
+                                    <label style="cursor: not-allowed" class="control-label2" for="username">用户名</label>
+                                    <input disabled style="cursor: not-allowed" type="text" class="form-control"
+                                           name="userName" id="username" autocomplete="off"/>
+                                </div>
+                                <div class="form-group">
+                                    <label style="cursor: not-allowed" class="control-label2" for="userclass">班级</label>
+                                    <input disabled style="cursor: not-allowed" type="text" class="form-control" name="userClass" id="userclass"
+                                           autocomplete="off"/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label2" for="teamname">团队名称</label>
+                                    <input type="text" class="form-control" name="teamName" id="teamname"
+                                           autocomplete="off"/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label2" for="userphone">联系方式</label>
+                                    <input type="text" class="form-control" name="userPhone" id="userphone"
+                                           autocomplete="off"/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label2" for="userpassword">密码</label>
+                                    <input type="password" class="form-control" name="userPassword" id="userpassword"
+                                           autocomplete="off"/>
+                                </div>
+                                <br>
+                                <div class="form-group" style="float: right">
+                                    <button type="button" onclick="history.go(-1)" class="btn btn-white"
+                                            data-dismiss="modal">取消
+                                    </button>
+                                    <button style="text-align: center" type="submit" class="btn btn-info"><i
+                                            class="fa-lock"></i>确认信息
+                                    </button>
+                                </div>
+
+
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<!-- Bottom Scripts -->
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/TweenMax.min.js"></script>
+<script src="assets/js/resizeable.js"></script>
+<script src="assets/js/joinable.js"></script>
+
+<script src="assets/js/xenon-api.js"></script>
+<script src="assets/js/xenon-toggles.js"></script>
+<script src="assets/js/jquery-validate/jquery.validate.min.js"></script>
+<script src="assets/js/jquery-validate/additional-methods.js"></script>
+<script src="assets/js/toastr/toastr.min.js"></script>
+
+
+<%--<!-- Imported scripts on this page -->--%>
+<%--<script src="assets/js/inputmask/jquery.inputmask.bundle.js"></script>--%>
+
+
+<!-- JavaScripts initializations and stuff -->
+<script src="assets/js/xenon-custom.js"></script>
+<script>
+    function getUserSession() {
+        var value = "";
+        $.ajax({
+            url: "/session/user",
+            method: 'GET',
+            dataType: 'json',
+            async: false,
+            success: function (resp) {
+                if (resp.code == 100) {
+                    value = resp.extend;
+                }
+            }
+        });
+        return value;
+    }
+
+    $("#self").text(getUserSession().userName);
+</script>
+</body>
+</html>

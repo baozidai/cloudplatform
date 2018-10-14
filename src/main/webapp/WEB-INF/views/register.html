@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>容器云平台</title>
+    <link rel="shortcut icon" href="assets/images/favicon.png">
+    <link rel="stylesheet" href="assets/css/fonts/linecons/css/linecons.css">
+    <link rel="stylesheet" href="assets/css/fonts/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/xenon-core.css">
+    <link rel="stylesheet" href="assets/css/xenon-forms.css">
+    <link rel="stylesheet" href="assets/css/xenon-components.css">
+    <link rel="stylesheet" href="assets/css/xenon-skins.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
+    <link rel="stylesheet" href="assets/js/layer-v3.1.0/layer/theme/default/layer.css">
+
+    <script src="assets/js/jquery-1.11.1.min.js"></script>
+    <script src="assets/js/layer-v3.1.0/layer/layer.js"></script>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="assets/js/html5shiv.min.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+        @media (min-width: 780px) {
+            .login-page {
+                padding-top: 50px;
+            }
+        }
+
+        .linkAdmin:hover {
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+<body class="page-body login-page login-light">
+
+
+<div class="login-container">
+
+    <div class="row">
+
+        <div class="col-sm-6 col-sm-offset-3">
+
+            <script type="text/javascript">
+                jQuery(document).ready(function ($) {
+                    setTimeout(function () {
+                        $(".fade-in-effect").addClass('in');
+                    }, 1);
+
+                    $("form#login").validate({
+                        rules: {
+                            userName: {
+                                required: true,
+                                stringCheck: true,
+                                remote: {
+                                    url: "/users/check/userName",     //后台处理程序
+                                    type: "POST",               //数据发送方式
+                                    dataType: "json",           //接受数据格式
+                                    data: {                     //要传递的数据
+                                        userName: function () {
+                                            return $("#username").val();
+                                        }
+                                    }
+                                }
+                            },
+                            userPassword: {
+                                required: true,
+                                minlength: 6,
+                                isPwd: true
+                            },
+                            passwd2: {
+                                required: true,
+                                minlength: 6,
+                                equalTo: "#passwd"
+                            },
+                            teamName: {
+                                required: true,
+                                stringNormalCheck: true
+                            },
+                            userPhone: {
+                                required: true,
+                                digits: true,
+                                rangelength: [11, 11]
+                            },
+                            userClass: {
+                                required: true,
+                                stringNormalCheck: true
+                            }
+                        },
+
+                        messages: {
+                            userName: {
+                                required: '请输入用户名',
+                                remote: '用户名已存在'
+                            },
+
+                            userPassword: {
+                                required: '请输入密码',
+                                minlength: "密码不能小于6个字符"
+                            },
+                            passwd2: {
+                                required: '请再次输入密码',
+                                minlength: "密码不能小于6个字符",
+                                equalTo: "两次输入密码不一致"
+                            },
+                            teamName: {
+                                required: '请输入团队名称'
+                            },
+                            userPhone: {
+                                required: '请输入联系方式',
+                                digits: '请正确填写您的联系方式',
+                                rangelength: '手机号为11位'
+                            },
+                            userClass:{
+                                required: '请输入班级'
+                            }
+                        },
+                        submitHandler: function (form) {
+//                            layer.msg("请等待")
+
+                            show_loading_bar(70);
+                            var index = layer.load(1, {
+                                shade: [0.5, '#2c2f2e'] //0.1透明度的白色背景
+                            });
+                            var opts = {
+                                "closeButton": true,
+                                "debug": false,
+                                "positionClass": "toast-top-full-width",
+                                "onclick": null,
+                                "showDuration": "300",
+                                "hideDuration": "1000",
+                                "timeOut": "5000",
+                                "extendedTimeOut": "1000",
+                                "showEasing": "swing",
+                                "hideEasing": "linear",
+                                "showMethod": "fadeIn",
+                                "hideMethod": "fadeOut"
+                            };
+
+                            $.ajax({
+                                url: "/users/user",
+                                method: 'POST',
+                                dataType: 'json',
+                                data: {
+                                    roleId: 2,
+                                    userName: $(form).find('#username').val(),
+                                    userPassword: $(form).find('#passwd').val(),
+                                    teamName: $(form).find('#teamname').val(),
+                                    userPhone: $(form).find('#userphone').val(),
+                                    userClass: $(form).find('#userclass').val()
+                                },
+
+                                success: function (resp) {
+
+                                    show_loading_bar({
+                                        delay: .5,
+                                        pct: 100,
+                                        finish: function () {
+                                            layer.close(index);
+                                            // Redirect after successful login page (when progress bar reaches 100%)
+                                            if (resp.code == 100) {
+                                                layer.msg(" 注册成功！即将跳转",{time: 1000, icon:1,end:function(){
+                                                    window.location.href = 'index.html';}});
+                                            }
+                                        }
+                                    });
+
+
+                                    // Remove any alert
+                                    $(".errors-container .alert").slideUp('fast');
+
+
+                                    // Show errors
+                                    if (resp.code == 100) {
+                                        $(".errors-container").html('<div class="alert alert-success">\
+												<button type="button" class="close" data-dismiss="alert">\
+													<span aria-hidden="true">&times;</span>\
+													<span class="sr-only">取消</span>\
+												</button>\
+												' + resp.msg + '\
+											</div>');
+                                    }else {
+                                        $(".errors-container").html('<div class="alert alert-danger">\
+												<button type="button" class="close" data-dismiss="alert">\
+													<span aria-hidden="true">&times;</span>\
+													<span class="sr-only">取消</span>\
+												</button>\
+												' + "服务器异常" + '\
+											</div>');
+                                    }
+
+                                    $(".errors-container .alert").hide().slideDown();
+                                    $(form).find('#username').select();
+
+                                }
+                            });
+
+                        }
+                    });
+
+                    // Set Form focus
+                    $("form#login .form-group:has(.form-control):first .form-control").focus();
+                });
+            </script>
+
+            <!-- Errors container -->
+            <div class="errors-container">
+
+
+            </div>
+
+            <!-- Add class "fade-in-effect" for login form effect -->
+            <form method="post" role="form" id="login" class="login-form fade-in-effect">
+
+                <div class="login-header">
+                    <a href="index.html" class="logo">
+                        <img src="assets/images/logo2.png" alt="" width="130"/>
+                        <span style="margin-left: 3px;font-size: 13px">注册</span>
+                    </a>
+
+                    <p>Dear user, log in to access the User area!</p>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="control-label" for="username">输入用户名</label>
+                    <input type="text" class="form-control" name="userName" id="username" autocomplete="off"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="passwd">输入密码</label>
+                    <input type="password" class="form-control" name="userPassword" id="passwd" autocomplete="off"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="passwd2">再次输入密码</label>
+                    <input type="password" class="form-control" name="passwd2" id="passwd2" autocomplete="off"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="teamname">输入团队名称</label>
+                    <input type="text" class="form-control" name="teamName" id="teamname" autocomplete="off"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="userphone">输入联系方式</label>
+                    <input type="text" class="form-control" name="userPhone" id="userphone" autocomplete="off"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="userclass">输入班级</label>
+                    <input type="text" class="form-control" name="userClass" id="userclass" autocomplete="off"/>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-info btn-block text-left">
+                        <i class="fa-lock"></i>
+                        注册
+                    </button>
+                </div>
+
+                <div class="login-footer">
+                    <a href="index.html">已注册，点击此处</a>
+                    <div class="info-links">
+                        <a class="linkAdmin" onclick="linkAdmin()">有疑问联系管理员?</a>
+                    </div>
+                </div>
+
+            </form>
+
+            <!-- External login -->
+            <div class="external-login">
+                <a href="#" class="facebook">
+                    <i class="fa fa-download"></i>
+                    点击下载使用说明
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Bottom Scripts -->
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/TweenMax.min.js"></script>
+<script src="assets/js/resizeable.js"></script>
+<script src="assets/js/joinable.js"></script>
+<script src="assets/js/xenon-api.js"></script>
+<script src="assets/js/xenon-toggles.js"></script>
+<script src="assets/js/jquery-validate/jquery.validate.min.js"></script>
+<script src="assets/js/jquery-validate/additional-methods.js"></script>
+<script src="assets/js/toastr/toastr.min.js"></script>
+
+
+<!-- JavaScripts initializations and stuff -->
+<script src="assets/js/xenon-custom.js"></script>
+<script>
+    function linkAdmin() {
+        var opts = {
+            "closeButton": true,
+            "debug": false,
+            "positionClass": "toast-top-left",
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "15000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+
+        toastr.success("电话：18581529712<br>Q Q：154882049", "联系管理员:", opts);
+    }
+
+</script>
+</body>
+</html>
