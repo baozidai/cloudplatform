@@ -1,0 +1,19 @@
+# Created by .ignore support plugin (hsz.mobi)
+.DS_Store
+.idea/artifacts/
+.idea/compiler.xml
+.idea/dataSources.local.xml
+.idea/dataSources.xml
+.idea/dataSources/
+.idea/dictionaries/
+.idea/encodings.xml
+.idea/inspectionProfiles/
+.idea/libraries/
+.idea/misc.xml
+.idea/modules.xml
+.idea/uiDesigner.xml
+.idea/workspace.xml
+cloudplatform.iml
+logs/
+src/test/
+target/

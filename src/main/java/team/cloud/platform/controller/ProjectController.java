@@ -88,8 +88,8 @@ public class ProjectController {
      * @return ModelAndView
      */
     @ApiOperation(value = "用户跳转到单个容器的项目的界面")
-    @GetMapping(value = "{podId}")
-    public ModelAndView project(@PathVariable("podId") Integer podId, HttpSession session) {
+    @GetMapping()
+    public ModelAndView project(@RequestParam("podId") Integer podId, HttpSession session) {
         ModelAndView mv = new ModelAndView();
         session.setAttribute("podId", podId);
         mv.addObject("podId", podId);

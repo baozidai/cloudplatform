@@ -44,12 +44,12 @@
 
                 <!-- logo -->
                 <div class="logo">
-                    <a href="/tomcat" class="logo-expanded">
+                    <a href="/pods/tomcat" class="logo-expanded">
                         <i class="fa fa-cloud" style="color: #fff;font-size: 20px;"></i>
                         <img src="assets/images/logo1.png" alt="" style="width: 180px;height: 30px;margin-top: -10px"/>
                     </a>
 
-                    <a href="/tomcat" class="logo-collapsed">
+                    <a href="/pods/tomcat" class="logo-collapsed">
                         <i class="fa fa-cloud" style="color: #fff;font-size: 20px;;margin-top:10px"></i>
 
                     </a>
@@ -70,31 +70,31 @@
 
             <ul id="main-menu" class="main-menu">
                 <li>
-                    <a href="/tomcat">
+                    <a href="/pods/tomcat">
                         <i class="linecons-database" style="font-size: 16px"></i>
                         <span class="title">静态网页及Java Web项目</span>
                     </a>
                 </li>
                 <li class="active">
-                    <a href="/net">
+                    <a href="/pods/net">
                         <i class="linecons-doc" style="font-size: 16px"></i>
                         <span class="title">.Net项目</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/python">
+                    <a href="/pods/python">
                         <i class="linecons-database" style="font-size: 16px"></i>
                         <span class="title">Python项目</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/php">
+                    <a href="/pods/php">
                         <i class="linecons-doc" style="font-size: 16px"></i>
                         <span class="title">PHP项目</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/mysql">
+                    <a href="/pods/mysql">
                         <i class="linecons-params" style="font-size: 16px"></i>
                         <span class="title">数据库地址</span>
                     </a>
@@ -144,13 +144,13 @@
 
                     <ul class="dropdown-menu user-profile-menu list-unstyled">
                         <li>
-                            <a href="/user_info">
+                            <a href="/users/info">
                                 <i class="fa-user"></i>
                                 个人信息
                             </a>
                         </li>
                         <li class="last">
-                            <a href="/logout">
+                            <a href="/users/logout">
                                 <i class="fa-lock"></i>
                                 退出登录
                             </a>
@@ -182,7 +182,7 @@
 
             <ol class="breadcrumb bc-1">
                 <li>
-                    <a href="/net"><i class="fa-home"></i>返回net容器</a>
+                    <a href="/pods/net"><i class="fa-home"></i>返回net容器</a>
                 </li>
                 <li class="active">
 
@@ -210,10 +210,10 @@
                         var i = 1,
                             $example_dropzone_filetable = $("#example-dropzone-filetable"),
                             example_dropzone = $("#advancedDropzone").dropzone({
-                                url: '/container_and_project',
+                                url: '/pods/projects',
                                 data:{
                                     image: "10.2.132.171:5000/net:1.0",
-                                    containerType: 4
+                                    podType: 4
                                 },
                                 maxFilesize: 80,
                                 paramName: "file",
@@ -247,7 +247,7 @@
                                 },
                                 success: function (file) {
                                     var _this = JSON.parse(file.xhr.responseText);
-                                    if (_this.code == 100) {
+                                    if (_this.code == 4) {
                                         file.fileEntryTd.find('td:last').html('<span class="text-success">上传成功</span>');
                                         file.progressBar.removeClass('progress-bar-warning').addClass('progress-bar-success');
                                     } else{
@@ -257,7 +257,7 @@
                                 },
 
                                 error: function (file) {
-                                    file.fileEntryTd.find('td:last').html('<span class="text-danger">上传失败</span>');
+                                    file.fileEntryTd.find('td:last').html('<span class="text-danger">file.msg</span>');
                                     file.progressBar.removeClass('progress-bar-warning').addClass('progress-bar-red');
 
                                 }
@@ -331,12 +331,12 @@
     function getUserSession() {
         var value = "";
         $.ajax({
-            url: "/session/user",
+            url: "/users/session",
             method: 'GET',
             dataType: 'json',
             async: false,
             success: function (resp) {
-                if (resp.code == 100) {
+                if (resp.code == 4) {
                     value = resp.extend;
                 }
             }

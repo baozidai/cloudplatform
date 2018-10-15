@@ -42,8 +42,6 @@ public class PodServiceImpl implements PodService {
     private PodMapper podMapper;
     @Autowired
     private NetService netService;
-
-    private String storeLocation = CommonConstants.storeLocation;
     @Autowired
     private FileService fileService;
     @Autowired
@@ -64,7 +62,8 @@ public class PodServiceImpl implements PodService {
         Pod pod = new Pod();
         String podName = KeyUtil.genUniqueKey();
         //容器目录，即挂载位置
-        String volume = storeLocation + podName;
+        String storeLocation = CommonConstants.storeLocation;
+        String volume = storeLocation + userId + "/" + podName;
         pod.setUserId(userId);
         pod.setPodName(podName);
         pod.setType(podType.getCode());

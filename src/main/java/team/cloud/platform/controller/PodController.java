@@ -102,7 +102,7 @@ public class PodController {
      * @return 结果集
      */
     @ApiOperation(value = "判断用户是否能创建PHP容器并创建")
-    @PostMapping(value = "/php")
+    @PostMapping(value = "/php/exist")
     public Result createPhpPod(HttpSession session){
 
         Integer userId = (Integer) session.getAttribute("userId");
@@ -124,7 +124,7 @@ public class PodController {
      * @return 结果集
      */
     @ApiOperation(value = "通用重启容器方法")
-    @PostMapping(value = "/restart/{podId}")
+    @PutMapping(value = "/restart/{podId}")
     public Result commonRestartPod(@PathVariable("podId") Integer podId){
         try {
             podService.commonRestartPod(podId);

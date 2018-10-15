@@ -43,12 +43,12 @@
 
                 <!-- logo -->
                 <div class="logo">
-                    <a href="/tomcat" class="logo-expanded">
+                    <a href="/pods/tomcat" class="logo-expanded">
                         <i class="fa fa-cloud" style="color: #fff;font-size: 20px;"></i>
                         <img src="assets/images/logo1.png" alt="" style="width: 180px;height: 30px;margin-top: -10px"/>
                     </a>
 
-                    <a href="/tomcat" class="logo-collapsed">
+                    <a href="/pods/tomcat" class="logo-collapsed">
                         <i class="fa fa-cloud" style="color: #fff;font-size: 20px;;margin-top:10px"></i>
 
                     </a>
@@ -70,31 +70,31 @@
             <ul id="main-menu" class="main-menu">
 
                 <li class="active">
-                    <a href="/tomcat">
+                    <a href="/pods/tomcat">
                         <i class="linecons-database" style="font-size: 16px"></i>
                         <span class="title">静态网页及Java Web项目</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/net">
+                    <a href="/pods/net">
                         <i class="linecons-doc" style="font-size: 16px"></i>
                         <span class="title">.Net项目</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/python">
+                    <a href="/pods/python">
                         <i class="linecons-database" style="font-size: 16px"></i>
                         <span class="title">Python项目</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/php">
+                    <a href="/pods/php">
                         <i class="linecons-doc" style="font-size: 16px"></i>
                         <span class="title">PHP项目</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/mysql">
+                    <a href="/pods/mysql">
                         <i class="linecons-params" style="font-size: 16px"></i>
                         <span class="title">数据库地址</span>
                     </a>
@@ -144,13 +144,13 @@
 
                     <ul class="dropdown-menu user-profile-menu list-unstyled">
                         <li>
-                            <a href="/user_info">
+                            <a href="/users/info">
                                 <i class="fa-user"></i>
                                 个人信息
                             </a>
                         </li>
                         <li class="last">
-                            <a href="/logout">
+                            <a href="/users/logout">
                                 <i class="fa-lock"></i>
                                 退出登录
                             </a>
@@ -192,7 +192,7 @@
 
             <ol class="breadcrumb bc-1">
                 <li>
-                    <a href="/tomcat"><i class="fa-home"></i>返回Tomcat</a>
+                    <a href="/pods/tomcat"><i class="fa-home"></i>返回Tomcat</a>
                 </li>
                 <li class="active">
 
@@ -232,7 +232,7 @@
                                     "pageLength": 9,
 //                                    searching: false,
                                     "ajax": {
-                                        "url": "/pod/project",
+                                        "url": "/projects/pod",
                                         "dataType": "json",
                                         "method": "GET",
                                         "dataSrc":
@@ -242,11 +242,11 @@
                                     },
                                     "columns": [
                                         {
-                                            "data": "id",
-                                            "title": "ID"
+                                            "data": "projectId",
+                                            "title": "projectId"
                                         },
                                         {
-                                            "data": "name",
+                                            "data": "projectName",
                                             "title": "项目名"
                                         },
                                         {
@@ -355,23 +355,23 @@
             btn: ['确认', '取消'] //按钮
         }, function () {
             $.ajax({
-                url: '/project/' + data,
+                url: '/projects/' + data,
                 type: "DELETE",
                 async: false,
                 dataType: "json",
                 success: function (data) {
-                    if (data.code == 100) {
+                    if (data.code == 4) {
                         layer.msg('已删除', {
                             time: 1000, end: function () {
                                 window.location.reload();
                             }
                         });
                     } else {
-
+                        layer.msg(data.msg)
                     }
                 },
-                error: function () {
-                    layer.msg('删除失败')
+                error: function (data) {
+                    layer.msg(data.msg)
                 }
             });
         }, function () {
@@ -383,12 +383,12 @@
     function getUserSession() {
         var value = "";
         $.ajax({
-            url: "/session/user",
+            url: "/users/session",
             method: 'GET',
             dataType: 'json',
             async: false,
             success: function (resp) {
-                if (resp.code == 100) {
+                if (resp.code == 4) {
                     value = resp.extend;
                 }
             }

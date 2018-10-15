@@ -37,7 +37,7 @@ public enum ResultEnums {
     /**
      * 通用返回异常结果集
      */
-    COMMON_EXCEPTION(6, "异常"),
+    COMMON_EXCEPTION(6, "服务器异常，请稍后尝试"),
 
     /**
      * 不支持
@@ -50,9 +50,9 @@ public enum ResultEnums {
     POD_DELETE_FAIL(8, "容器删除失败"),
 
     /**
-     * 容器不存在
+     * 容器未启动
      */
-    POD_NOT_FOUND(9, "不存在"),
+    POD_NOT_FOUND(9, "未启动"),
 
     /**
      * php容器已存在

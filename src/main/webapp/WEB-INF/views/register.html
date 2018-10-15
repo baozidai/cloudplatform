@@ -163,7 +163,7 @@
                                         finish: function () {
                                             layer.close(index);
                                             // Redirect after successful login page (when progress bar reaches 100%)
-                                            if (resp.code == 100) {
+                                            if (resp.code == 4) {
                                                 layer.msg(" 注册成功！即将跳转",{time: 1000, icon:1,end:function(){
                                                     window.location.href = 'index.html';}});
                                             }
@@ -176,7 +176,7 @@
 
 
                                     // Show errors
-                                    if (resp.code == 100) {
+                                    if (resp.code == 6) {
                                         $(".errors-container").html('<div class="alert alert-success">\
 												<button type="button" class="close" data-dismiss="alert">\
 													<span aria-hidden="true">&times;</span>\

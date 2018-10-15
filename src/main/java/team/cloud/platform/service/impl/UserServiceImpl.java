@@ -33,11 +33,6 @@ import java.util.Set;
 @Transactional(rollbackFor = RuntimeException.class)
 public class UserServiceImpl implements UserService {
 
-    /**
-     * 本项目的存储目录
-     */
-    private String storeLocation = CommonConstants.storeLocation;
-
     @Autowired
     private UserMapper userMapper;
 

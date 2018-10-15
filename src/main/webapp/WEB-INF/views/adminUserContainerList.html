@@ -43,12 +43,12 @@
 
                 <!-- logo -->
                 <div class="logo">
-                    <a href="/user_list" class="logo-expanded">
+                    <a href="/users/user_list" class="logo-expanded">
                         <i class="fa fa-cloud" style="color: #fff;font-size: 20px;"></i>
                         <img src="assets/images/logo1.png" alt="" style="width: 180px;height: 30px;margin-top: -10px"/>
                     </a>
 
-                    <a href="/user_list" class="logo-collapsed">
+                    <a href="/users/user_list" class="logo-collapsed">
                         <i class="fa fa-cloud" style="color: #fff;font-size: 20px;;margin-top:10px"></i>
 
                     </a>
@@ -70,19 +70,19 @@
             <ul id="main-menu" class="main-menu">
 
                 <li class="active">
-                    <a href="/user_list">
+                    <a href="/users/user_list">
                         <i class="linecons-database" style="font-size: 16px"></i>
                         <span class="title">用户列表</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/container_list">
+                    <a href="/pods/container_list">
                         <i class="linecons-doc" style="font-size: 16px"></i>
                         <span class="title">容器列表</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/admin_list">
+                    <a href="/users/admin_list">
                         <i class="linecons-params" style="font-size: 16px"></i>
                         <span class="title">管理员列表</span>
                     </a>
@@ -132,7 +132,7 @@
 
                     <ul class="dropdown-menu user-profile-menu list-unstyled">
                         <li class="last">
-                            <a href="/logout">
+                            <a href="/users/logout">
                                 <i class="fa-lock"></i>
                                 退出登录
                             </a>
@@ -205,7 +205,7 @@
                                     "pageLength": 9,
 //                                    searching: false,
                                     "ajax": {
-                                        "url": "/user/"+ userId +"/container",
+                                        "url": "/pods/users/"+ userId,
                                         "dataType": "json",
                                         "method": "GET",
                                         "data":{
@@ -299,7 +299,7 @@
                                     "pageLength": 9,
                                     //                                    searching: false,
                                     "ajax": {
-                                        "url": "/user/"+ userId +"/container",
+                                        "url": "/pods/users/"+ userId,
                                         "dataType": "json",
                                         "method": "GET",
                                         "data":{
@@ -393,7 +393,7 @@
                                     "pageLength": 9,
                                     //                                    searching: false,
                                     "ajax": {
-                                        "url": "/user/"+ userId +"/container",
+                                        "url": "/pods/users/"+ userId,
                                         "dataType": "json",
                                         "method": "GET",
                                         "data":{
@@ -511,7 +511,7 @@
                                     "pageLength": 9,
                                     //                                    searching: false,
                                     "ajax": {
-                                        "url": "/user/"+ userId +"/container",
+                                        "url": "/pods/users/"+ userId,
                                         "dataType": "json",
                                         "method": "GET",
                                         "data":{
@@ -647,12 +647,12 @@
     function getUserSession() {
         var value = "";
         $.ajax({
-            url: "/session/user",
+            url: "/users/session",
             method: 'GET',
             dataType: 'json',
             async: false,
             success: function (resp) {
-                if (resp.code == 100) {
+                if (resp.code == 4) {
                     value = resp.extend;
                 }
             }
@@ -663,12 +663,12 @@
     function getUserIdSession() {
         var value = "";
         $.ajax({
-            url: "/session/admin/userId",
+            url: "/users/session/admin/userId",
             method: 'GET',
             dataType: 'json',
             async: false,
             success: function (resp) {
-                if (resp.code == 100) {
+                if (resp.code == 4) {
                     value = resp.extend;
                 }
             }

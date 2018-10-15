@@ -115,9 +115,9 @@
                                             if (resp.code == 1) {
                                                 layer.msg(resp.msg);
                                                 if(resp.extend == "用户"){
-                                                    window.location.href = 'userTomcat.html';
+                                                    window.location.href = '/pods/tomcat';
                                                 }else if(resp.extend == "管理员"){
-                                                    window.location.href = 'adminUserList.html';
+                                                    window.location.href = '/users/user_list';
                                                 }
                                             }
                                             // Remove any alert
@@ -282,10 +282,12 @@
             method: 'GET',
             dataType: 'json',
             success: function (resp) {
-                if (resp.code == 100) {
+                if (resp.code == 4) {
                     window.location.href = "/users/register"
-                }else if (resp.code == 200) {
+                }else if (resp.code == 11) {
                     layer.msg("资源已全部被占用")
+                }else{
+                    layer.msg("服务器异常，请稍后尝试")
                 }
             }
         })

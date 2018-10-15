@@ -82,12 +82,12 @@
 
                 <!-- logo -->
                 <div class="logo">
-                    <a href="/user_list" class="logo-expanded">
+                    <a href="/users/user_list" class="logo-expanded">
                         <i class="fa fa-cloud" style="color: #fff;font-size: 20px;"></i>
                         <img src="assets/images/logo1.png" alt="" style="width: 180px;height: 30px;margin-top: -10px"/>
                     </a>
 
-                    <a href="/user_list" class="logo-collapsed">
+                    <a href="/users/user_list" class="logo-collapsed">
                         <i class="fa fa-cloud" style="color: #fff;font-size: 20px;;margin-top:10px"></i>
 
                     </a>
@@ -109,19 +109,19 @@
 
             <ul id="main-menu" class="main-menu">
                 <li class="active">
-                    <a href="/user_list">
+                    <a href="/users/user_list">
                         <i class="linecons-database" style="font-size: 16px"></i>
                         <span class="title" >用户列表</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/container_list">
+                    <a href="/pods/container_list">
                         <i class="linecons-doc" style="font-size: 16px"></i>
                         <span class="title" >容器列表</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/admin_list">
+                    <a href="/users/admin_list">
                         <i class="linecons-params" style="font-size: 16px"></i>
                         <span class="title">管理员列表</span>
                     </a>
@@ -169,7 +169,7 @@
 
                     <ul class="dropdown-menu user-profile-menu list-unstyled">
                         <li class="last">
-                            <a href="/logout">
+                            <a href="/uesrs/logout">
                                 <i class="fa-lock"></i>
                                 退出登录
                             </a>
@@ -230,7 +230,7 @@
                                     "pageLength":9,
 //                                    searching: false,
                                     "ajax": {
-                                        "url":"/user",
+                                        "url":"/users",
                                         "dataType":"json",
                                         "method":"GET",
                                         "data":{
@@ -399,7 +399,7 @@
                                     };
 
                                     $.ajax({
-                                        url: "/user/" + $(form).find('#userid').val(),
+                                        url: "/users/" + $(form).find('#userid').val(),
                                         method: 'PUT',
                                         dataType: 'json',
                                         data: {
@@ -416,9 +416,9 @@
                                                 finish: function () {
 
                                                     // Redirect after successful login page (when progress bar reaches 100%)
-                                                    if (resp.code==100) {
+                                                    if (resp.code==4) {
                                                         layer.msg(" 保存成功！",{time: 1000, icon:1,end:function(){
-                                                            window.location.href = '/user_list';}});
+                                                            window.location.href = '/users/user_list';}});
                                                     }
                                                 }
                                             });
@@ -511,7 +511,7 @@
                                         required: true,
                                         stringCheck:true,
                                         remote: {
-                                            url: "/check/userName",     //后台处理程序
+                                            url: "/users/check/userName",     //后台处理程序
                                             type: "POST",               //数据发送方式
                                             dataType: "json",           //接受数据格式
                                             data: {                     //要传递的数据
@@ -594,7 +594,7 @@
                                     };
 
                                     $.ajax({
-                                        url:"/user/register",
+                                        url:"/users/user",
                                         dataType:"json",
                                         method:"POST",
                                         data: {
@@ -613,9 +613,9 @@
                                                 finish: function () {
 
                                                     // Redirect after successful login page (when progress bar reaches 100%)
-                                                    if (resp.code == 100) {
+                                                    if (resp.code == 4) {
                                                         layer.msg("保存成功！")
-                                                        window.location.href = '/user_list';
+                                                        window.location.href = '/users/user_list';
                                                     }
                                                 }
                                             });
@@ -625,7 +625,7 @@
                                             $(".errors-container .alert").slideUp('fast');
 
                                             // Show errors
-                                            if (resp.code == 100) {
+                                            if (resp.code == 4) {
                                                 $(".errors-container").html('<div class="alert alert-success">\
 												<button type="button" class="close" data-dismiss="alert">\
 													<span aria-hidden="true">&times;</span>\
@@ -746,19 +746,16 @@
             btn: ['确认','取消'] //按钮
         }, function(){
             $.ajax({
-                url:'/deleteUser',
-                data:{
-                    userId: id
-                },
-                type:"post",
+                url:'/users/' + id,
+                type:"DELETE",
                 async:false,
                 dataType:"json",
                 success:function(data){
-                    if(data.code==100){
+                    if(data.code==4){
                         layer.msg('已删除',{time: 1000,end:function(){
                             window.location.reload();}});
                     }else{
-
+                        layer.msg(data.msg)
                     }
                 },
                 error:function () {
@@ -776,7 +773,7 @@
         //获取查看行的id
 //        alert(data)
         $.ajax({
-            url : "/user/" + id,
+            url : "/users/" + id,
             type : "GET",
             dataType : "json",
             success : function (res) {
@@ -811,19 +808,20 @@
 
         }, function(){
             $.ajax({
-                url:'/container',
+                url:'/pods',
                 data:{
                     userId: id,
                     image: dataImage,
-                    containerType: type
+                    podType: type
                 },
                 type:"post",
                 async:false,
                 dataType:"json",
                 success:function(data){
-                    if(data.code==100){
+                    if(data.code==4){
                         layer.msg('已新增容器')
                     }else{
+                        layer.msg(data.msg)
                     }
                 },
                 error:function () {
@@ -837,18 +835,18 @@
     }
     function lookProgramme(btn) {
         var userId = btn.parentNode.parentNode.firstChild.textContent;
-        window.location.href = '/user_container_list?userId=' + userId
+        window.location.href = '/pods/user_container_list?userId=' + userId
     }
     function addUser() {
         $.ajax({
-            url: "/check/host",
+            url: "/hosts",
             method: 'POST',
             dataType: 'json',
             data:"",
             success:function (resp) {
-                if(resp.code==100){
+                if(resp.code==4){
                     jQuery('#modal-addUser').modal('show', {backdrop: 'static'});
-                }else if (resp.code == 200) {
+                }else if (resp.code == 11) {
                     layer.msg("资源已全部被占用");
 
                 }
@@ -860,12 +858,12 @@
     function getUserSession() {
         var value = "";
         $.ajax({
-            url: "/session/user",
+            url: "/users/session",
             method: 'GET',
             dataType: 'json',
             async: false,
             success: function (resp) {
-                if (resp.code == 100) {
+                if (resp.code == 4) {
                     value = resp.extend;
                 }
             }

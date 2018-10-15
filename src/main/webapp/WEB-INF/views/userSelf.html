@@ -81,12 +81,12 @@
 
                 <!-- logo -->
                 <div class="logo">
-                    <a href="/tomcat" class="logo-expanded">
+                    <a href="/pods/tomcat" class="logo-expanded">
                         <i class="fa fa-cloud" style="color: #fff;font-size: 20px;"></i>
                         <img src="assets/images/logo1.png" alt="" style="width: 180px;height: 30px;margin-top: -10px"/>
                     </a>
 
-                    <a href="/tomcat" class="logo-collapsed">
+                    <a href="/pods/tomcat" class="logo-collapsed">
                         <i class="fa fa-cloud" style="color: #fff;font-size: 20px;;margin-top:10px"></i>
 
                     </a>
@@ -107,31 +107,31 @@
 
             <ul id="main-menu" class="main-menu">
                 <li>
-                    <a href="/tomcat">
+                    <a href="/pods/tomcat">
                         <i class="linecons-database" style="font-size: 16px"></i>
                         <span class="title">静态网页及Java Web项目</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/net">
+                    <a href="/pods/net">
                         <i class="linecons-doc" style="font-size: 16px"></i>
                         <span class="title">.Net项目</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/python">
+                    <a href="/pods/python">
                         <i class="linecons-database" style="font-size: 16px"></i>
                         <span class="title">Python项目</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/php">
+                    <a href="/pods/php">
                         <i class="linecons-doc" style="font-size: 16px"></i>
                         <span class="title">PHP项目</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/mysql">
+                    <a href="/pods/tomcat">
                         <i class="linecons-params" style="font-size: 16px"></i>
                         <span class="title">数据库地址</span>
                     </a>
@@ -181,13 +181,13 @@
 
                     <ul class="dropdown-menu user-profile-menu list-unstyled">
                         <li>
-                            <a href="/user_info">
+                            <a href="/users/info">
                                 <i class="fa-user"></i>
                                 个人信息
                             </a>
                         </li>
                         <li class="last">
-                            <a href="/logout">
+                            <a href="/users/logout">
                                 <i class="fa-lock"></i>
                                 退出登录
                             </a>
@@ -228,7 +228,7 @@
                                     var userId = getUserSession().userId;
                                     $.ajax({
                                         type: "GET",
-                                        url: "/user/" + userId,
+                                        url: "/users/" + userId,
                                         dataType: "json",
                                         success: function (resp) {
                                             $('#userid').val(resp.extend.userId);
@@ -305,7 +305,7 @@
                                             };
 
                                             $.ajax({
-                                                url: "/user/" + userId,
+                                                url: "/users/" + userId,
                                                 method: 'PUT',
                                                 dataType: 'json',
                                                 data: {
@@ -322,12 +322,15 @@
                                                         finish: function () {
 
                                                             // Redirect after successful login page (when progress bar reaches 100%)
-                                                            if (resp.code == 100) {
+                                                            if (resp.code == 4) {
                                                                 layer.msg(" 保存成功！", {
                                                                     time: 1000, icon: 1, end: function () {
                                                                         window.location.reload();
                                                                     }
                                                                 });
+                                                            }
+                                                            else{
+                                                                layer.msg(resp.msg)
                                                             }
                                                         }
                                                     });
@@ -337,6 +340,23 @@
                                                     $(".errors-container .alert").slideUp('fast');
 
                                                     // Show errors
+                                                    if (resp.code == 6) {
+                                                        $(".errors-container").html('<div class="alert alert-success">\
+												<button type="button" class="close" data-dismiss="alert">\
+													<span aria-hidden="true">&times;</span>\
+													<span class="sr-only">取消</span>\
+												</button>\
+												' + resp.msg + '\
+											</div>');
+                                                    }else{
+                                                        $(".errors-container").html('<div class="alert alert-danger">\
+												<button type="button" class="close" data-dismiss="alert">\
+													<span aria-hidden="true">&times;</span>\
+													<span class="sr-only">取消</span>\
+												</button>\
+												' + "服务器异常" + '\
+											</div>');
+                                                    }
                                                 }
                                             });
 
@@ -431,12 +451,12 @@
     function getUserSession() {
         var value = "";
         $.ajax({
-            url: "/session/user",
+            url: "/users/session",
             method: 'GET',
             dataType: 'json',
             async: false,
             success: function (resp) {
-                if (resp.code == 100) {
+                if (resp.code == 4) {
                     value = resp.extend;
                 }
             }

@@ -70,7 +70,7 @@ public class UserController {
      * @return 结果集
      */
     @ApiOperation(value = "删除用户")
-    @DeleteMapping(value = "/delete/{userId}")
+    @DeleteMapping(value = "/{userId}")
     public Result deleteUser(@PathVariable("userId") Integer userId) {
         try {
             userService.deleteUserByUserId(userId);
@@ -99,7 +99,7 @@ public class UserController {
      * @return 结果集
      */
     @ApiOperation(value = "查询一条用户数据通过主键")
-    @GetMapping(value = "/query/{userId}")
+    @GetMapping(value = "/{userId}")
     public Result ser(@PathVariable("userId") Integer userId) {
         return ResultUtil.success(ResultEnums.COMMON_SUCCESS, userService.getUserByUserId(userId));
     }
@@ -111,7 +111,7 @@ public class UserController {
      * @return 结果集
      */
     @ApiOperation(value = "根据主键更新一条用户数据")
-    @PutMapping(value = "/update/{userId}")
+    @PutMapping(value = "/{userId}")
     public Result updateUser(User user) {
         try{
             userService.updateUserByUserId(user);
