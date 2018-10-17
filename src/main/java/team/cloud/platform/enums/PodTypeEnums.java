@@ -12,7 +12,7 @@ public enum PodTypeEnums {
     /**
      * javaWeb类型
      */
-    TOMCAT(1,"java"),
+    TOMCAT(1,"tomcat"),
 
     /**
      * phpWeb类型
@@ -27,7 +27,7 @@ public enum PodTypeEnums {
     /**
      * .netWeb类型
      */
-    NET(4,".net"),
+    NET(4,"net"),
 
     /**
      * mysql数据库

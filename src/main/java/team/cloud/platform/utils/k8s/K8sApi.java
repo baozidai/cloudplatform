@@ -166,19 +166,19 @@ public class K8sApi {
     public static String runApp(PodTypeEnums podType, String name, String image, String volume, String dllName){
         String text;
         switch (podType){
-            case PHP:
+            case TOMCAT:
                 text = tomcatJson(name, image, volume);
                 break;
-            case PYTHON:
+            case PHP:
                 text = phpJson(name, image, volume);
                 break;
-            case MYSQL:
+            case PYTHON:
                 text = pythonJson(name, image, volume);
                 break;
-            case TOMCAT:
+            case NET:
                 text = netJson(name, image, volume, dllName);
                 break;
-            case NET:
+            case MYSQL:
                 text = mysqlJson(name, image, volume);
                 break;
             default:
@@ -258,13 +258,13 @@ public class K8sApi {
                 "    }\r\n" +
                 "  },\r\n" +
                 "  \"spec\": {\r\n" +
-                "    \"pods\": [\r\n" +
+                "    \"containers\": [\r\n" +
                 "      {\r\n" +
                 "        \"name\": \""+name+"\",\r\n" +
                 "        \"image\": \""+image+"\",\r\n" +
                 "        \"ports\": [\r\n" +
                 "          {\r\n" +
-                "            \"podPort\": "+8080+"\r\n" +
+                "            \"containerPort\": "+8080+"\r\n" +
                 "          }\r\n" +
                 "        ],\r\n" +
                 "        \"volumeMounts\": [\r\n" +
@@ -308,13 +308,13 @@ public class K8sApi {
                 "    }\r\n" +
                 "  },\r\n" +
                 "  \"spec\": {\r\n" +
-                "    \"pods\": [\r\n" +
+                "    \"containers\": [\r\n" +
                 "      {\r\n" +
                 "        \"name\": \""+name+"\",\r\n" +
                 "        \"image\": \""+image+"\",\r\n" +
                 "        \"ports\": [\r\n" +
                 "          {\r\n" +
-                "            \"podPort\": "+80+"\r\n" +
+                "            \"containerPort\": "+80+"\r\n" +
                 "          }\r\n" +
                 "        ],\r\n" +
                 "        \"volumeMounts\": [\r\n" +
@@ -358,13 +358,13 @@ public class K8sApi {
                 "    }\r\n" +
                 "  },\r\n" +
                 "  \"spec\": {\r\n" +
-                "    \"pods\": [\r\n" +
+                "    \"containers\": [\r\n" +
                 "      {\r\n" +
                 "        \"name\": \""+name+"\",\r\n" +
                 "        \"image\": \""+image+"\",\r\n" +
                 "        \"ports\": [\r\n" +
                 "          {\r\n" +
-                "            \"podPort\": "+3306+"\r\n" +
+                "            \"containerPort\": "+3306+"\r\n" +
                 "          }\r\n" +
                 "        ],\r\n" +    //添加json对象时记得加逗号
                 "        \"volumeMounts\": [\r\n" +
@@ -415,13 +415,13 @@ public class K8sApi {
                 "    }\r\n" +
                 "  },\r\n" +
                 "  \"spec\": {\r\n" +
-                "    \"pods\": [\r\n" +
+                "    \"containers\": [\r\n" +
                 "      {\r\n" +
                 "        \"name\": \""+name+"\",\r\n" +
                 "        \"image\": \""+image+"\",\r\n" +
                 "        \"ports\": [\r\n" +
                 "          {\r\n" +
-                "            \"podPort\": "+80+"\r\n" +
+                "            \"containerPort\": "+80+"\r\n" +
                 "          }\r\n" +
                 "        ],\r\n" +    //添加json对象时记得加逗号
                 "        \"volumeMounts\": [\r\n" +
@@ -469,13 +469,13 @@ public class K8sApi {
                 "    }\r\n" +
                 "  },\r\n" +
                 "  \"spec\": {\r\n" +
-                "    \"pods\": [\r\n" +
+                "    \"containers\": [\r\n" +
                 "      {\r\n" +
                 "        \"name\": \""+name+"\",\r\n" +
                 "        \"image\": \""+image+"\",\r\n" +
                 "        \"ports\": [\r\n" +
                 "          {\r\n" +
-                "            \"podPort\": "+80+"\r\n" +
+                "            \"containerPort\": "+80+"\r\n" +
                 "          }\r\n" +
                 "        ],\r\n" +
                 "        \"volumeMounts\": [\r\n" +

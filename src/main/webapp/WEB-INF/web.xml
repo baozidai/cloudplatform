@@ -143,6 +143,20 @@
         <listener-class>team.cloud.platform.listener.PodStartAndStopSessionListener</listener-class>
     </listener>
 
+    <!-- 跨域请求 -->
+    <filter>
+        <filter-name>SimpleCORSFilter</filter-name>
+        <filter-class>team.cloud.platform.filter.SimpleCORSFilter</filter-class>
+        <init-param>
+            <param-name>IsCross</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>SimpleCORSFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
     <error-page>
         <error-code>500</error-code>
         <location>/WEB-INF/500.html</location>
@@ -150,5 +164,9 @@
     <error-page>
         <error-code>404</error-code>
         <location>/WEB-INF/404.html</location>
+    </error-page>
+    <error-page>
+        <error-code>405</error-code>
+        <location>/WEB-INF/405.html</location>
     </error-page>
 </web-app>

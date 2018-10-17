@@ -7,24 +7,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>容器云平台</title>
 
-    <link rel="shortcut icon" href="assets/images/favicon.png">
-    <link rel="stylesheet" href="assets/css/fonts/linecons/css/linecons.css">
-    <link rel="stylesheet" href="assets/css/fonts/fontawesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/bootstrap.css">
-    <link rel="stylesheet" href="assets/css/xenon-core.css">
-    <link rel="stylesheet" href="assets/css/xenon-forms.css">
-    <link rel="stylesheet" href="assets/css/xenon-components.css">
-    <link rel="stylesheet" href="assets/css/xenon-skins.css">
-    <link rel="stylesheet" href="assets/css/custom.css">
-    <link rel="stylesheet" href="assets/js/layer-v3.1.0/layer/theme/default/layer.css">
+    <link rel="shortcut icon" href="/assets/images/favicon.png">
+    <link rel="stylesheet" href="/assets/css/fonts/linecons/css/linecons.css">
+    <link rel="stylesheet" href="/assets/css/fonts/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/css/xenon-core.css">
+    <link rel="stylesheet" href="/assets/css/xenon-forms.css">
+    <link rel="stylesheet" href="/assets/css/xenon-components.css">
+    <link rel="stylesheet" href="/assets/css/xenon-skins.css">
+    <link rel="stylesheet" href="/assets/css/custom.css">
+    <link rel="stylesheet" href="/assets/js/layer-v3.1.0/layer/theme/default/layer.css">
 
-    <script src="assets/js/jquery-1.11.1.min.js"></script>
-    <script src="assets/js/layer-v3.1.0/layer/layer.js"></script>
+    <script src="/assets/js/jquery-1.11.1.min.js"></script>
+    <script src="/assets/js/layer-v3.1.0/layer/layer.js"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-    <script src="assets/js/html5shiv.min.js"></script>
-    <script src="assets/js/respond.min.js"></script>
+    <script src="/assets/js/html5shiv.min.js"></script>
+    <script src="/assets/js/respond.min.js"></script>
     <![endif]-->
     <style>
         #logs_modal-body{
@@ -52,7 +52,7 @@
                 <div class="logo">
                     <a href="/pods/tomcat" class="logo-expanded">
                         <i class="fa fa-cloud" style="color: #fff;font-size: 20px;"></i>
-                        <img src="assets/images/logo1.png" alt="" style="width: 180px;height: 30px;margin-top: -10px"/>
+                        <img src="/assets/images/logo1.png" alt="" style="width: 180px;height: 30px;margin-top: -10px"/>
                     </a>
 
                     <a href="/pods/tomcat" class="logo-collapsed">
@@ -221,15 +221,15 @@
                                         "dataType":"json",
                                         "method":"GET",
                                         "data":{
-                                            type: 1
+                                            podType: 1
                                         },
                                         "dataSrc":
                                             function(result){
                                                 return result.extend;//自定义数据源，默认为data
-                                            },
+                                            }
                                     },
                                     "columns": [
-                                        {  "data":'podId',
+                                        {   "data":'podId',
                                             "title": "podId"
                                         },
                                         {
@@ -335,34 +335,34 @@
 
 
 <!-- Bottom Scripts -->
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/TweenMax.min.js"></script>
-<script src="assets/js/resizeable.js"></script>
-<script src="assets/js/joinable.js"></script>
-<script src="assets/js/xenon-api.js"></script>
-<script src="assets/js/xenon-toggles.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/TweenMax.min.js"></script>
+<script src="/assets/js/resizeable.js"></script>
+<script src="/assets/js/joinable.js"></script>
+<script src="/assets/js/xenon-api.js"></script>
+<script src="/assets/js/xenon-toggles.js"></script>
 
 
 <!-- Imported scripts on this page -->
-<script src="assets/js/xenon-widgets.js"></script>
-<script src="assets/js/devexpress-web-14.1/js/globalize.min.js"></script>
-<script src="assets/js/devexpress-web-14.1/js/dx.chartjs.js"></script>
-<script src="assets/js/toastr/toastr.min.js"></script>
+<script src="/assets/js/xenon-widgets.js"></script>
+<script src="/assets/js/devexpress-web-14.1/js/globalize.min.js"></script>
+<script src="/assets/js/devexpress-web-14.1/js/dx.chartjs.js"></script>
+<script src="/assets/js/toastr/toastr.min.js"></script>
 
 
 
 <!-- Imported styles on this page -->
-<link rel="stylesheet" href="assets/js/datatables/dataTables.bootstrap.css">
-<script src="assets/js/datatables/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="/assets/js/datatables/dataTables.bootstrap.css">
+<script src="/assets/js/datatables/js/jquery.dataTables.min.js"></script>
 
 <!-- Imported scripts on this page -->
-<script src="assets/js/datatables/dataTables.bootstrap.js"></script>
-<script src="assets/js/datatables/yadcf/jquery.dataTables.yadcf.js"></script>
-<script src="assets/js/datatables/tabletools/dataTables.tableTools.min.js"></script>
+<script src="/assets/js/datatables/dataTables.bootstrap.js"></script>
+<script src="/assets/js/datatables/yadcf/jquery.dataTables.yadcf.js"></script>
+<script src="/assets/js/datatables/tabletools/dataTables.tableTools.min.js"></script>
 
 
 <!-- JavaScripts initializations and stuff -->
-<script src="assets/js/xenon-custom.js"></script>
+<script src="/assets/js/xenon-custom.js"></script>
 <script>
     var val;
     //修改表格Name
@@ -404,11 +404,11 @@
                 if(data.code == 4){
                     layer.msg("容器状态："+data.extend)
                 }else{
-                    layer.msg(data.extend)
+                    layer.msg(data.msg)
                 }
             },
             error:function(data) {
-                layer.msg(data.extend)
+                layer.msg(data.msg)
             }
         });
     }
@@ -428,11 +428,11 @@
                     if(data.code == 4){
                         layer.msg("重启成功")
                     }else{
-                        layer.msg(data.extend)
+                        layer.msg(data.msg)
                     }
                 },
                 error:function (data) {
-                    layer.msg(data.extend)
+                    layer.msg(data.msg)
                 }
             });   }, function(){
             layer.msg('已取消')
@@ -458,11 +458,11 @@
                 if(data.code == 4){
                         onMessage(data);
                 }else{
-                    layer.msg(data.extend)
+                    layer.msg(data.msg)
                 }
             },
             error:function (data) {
-                layer.msg(data.extend)
+                layer.msg(data.msg)
             }
         });
     }

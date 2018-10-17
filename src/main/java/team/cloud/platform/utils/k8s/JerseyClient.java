@@ -18,9 +18,9 @@ import javax.ws.rs.core.MediaType;
  */
 public class JerseyClient {
 
-    private static String apiIp="10.4.208.76:8080" ;
+    private static String apiIp="10.2.132.171:8080" ;
 
-    private static String namespace="default" ;
+    private static String namespace="cloud" ;
 
     private static String podApi="http://" + apiIp + "/api/v1/namespaces/" + namespace + "/pods/";
 
