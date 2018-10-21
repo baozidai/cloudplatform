@@ -9,6 +9,7 @@ import team.cloud.platform.constants.CommonConstants;
 import team.cloud.platform.converter.Int2PodTypeConverter;
 import team.cloud.platform.dao.PodMapper;
 import team.cloud.platform.dao.ProjectMapper;
+import team.cloud.platform.dao.UserMapper;
 import team.cloud.platform.entity.Pod;
 import team.cloud.platform.entity.Project;
 import team.cloud.platform.entity.User;
@@ -60,10 +61,11 @@ public class PodServiceImpl implements PodService {
     @Override
     public Pod insertPod(Integer userId, String image, PodTypeEnums podType) {
         Pod pod = new Pod();
-        String podName = KeyUtil.genUniqueKey();
+        String podName = podType + KeyUtil.genUniqueKey();
+        User user = userService.getUserByUserId(userId);
         //容器目录，即挂载位置
         String storeLocation = CommonConstants.storeLocation;
-        String volume = storeLocation + userId + "/" + podName;
+        String volume = storeLocation + user.getUserName() + "/" + podName;
         pod.setUserId(userId);
         pod.setPodName(podName);
         pod.setType(podType.getCode());

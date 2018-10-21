@@ -76,11 +76,13 @@
             <mvc:exclude-mapping path="/index.html"/>
             <mvc:exclude-mapping path="/index2.html"/>
             <mvc:exclude-mapping path="/users/login"/>
+            <mvc:exclude-mapping path="/hosts"/>
+            <mvc:exclude-mapping path="/users/register"/>
+            <mvc:exclude-mapping path="/WEB-INF/views/register.html"/>
             <mvc:exclude-mapping path="/swagger-resources/**"/>
             <mvc:exclude-mapping path="/webjars/**"/>
             <mvc:exclude-mapping path="/v2/**"/>
             <mvc:exclude-mapping path="/users/user"/>
-            <mvc:exclude-mapping path="/users/register"/>
             <mvc:exclude-mapping path="/swagger-ui.html/**"/>
             <mvc:exclude-mapping path="/users/check/userName"/>
             <bean class="team.cloud.platform.interceptor.LoginInterceptor" />

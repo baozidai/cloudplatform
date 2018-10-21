@@ -149,8 +149,8 @@ public class UserController {
      */
     @ApiOperation(value = "检查用户名是否重复")
     @PostMapping(value = "/check/userName")
-    public Result checkUserName(@RequestParam("userName") String userName) {
-        return ResultUtil.success(ResultEnums.COMMON_SUCCESS,userService.checkUserName(userName));
+    public boolean checkUserName(@RequestParam("userName") String userName) {
+        return userService.checkUserName(userName);
     }
 
     /**
