@@ -16,7 +16,6 @@ public interface ProjectMapper {
     /**
      * 查询项目地址通过主键
      *
-     *
      * @param projectId projectId
      * @return 项目地址
      */

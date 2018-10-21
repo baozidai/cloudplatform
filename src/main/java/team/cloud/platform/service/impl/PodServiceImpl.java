@@ -35,7 +35,6 @@ import java.util.List;
  * @date 2018/9/16下午7:29
  */
 @Service
-@Transactional(rollbackFor = RuntimeException.class)
 public class PodServiceImpl implements PodService {
 
     @Autowired
@@ -57,6 +56,7 @@ public class PodServiceImpl implements PodService {
      * @param podType 容器类型
      * @return Pod信息
      */
+    @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public Pod insertPod(Integer userId, String image, PodTypeEnums podType) {
         Pod pod = new Pod();
@@ -150,6 +150,7 @@ public class PodServiceImpl implements PodService {
         List<Pod> podList = podMapper.listPodByUserIdAndType(userId,type);
         if(podList!=null){
             for(Pod pod:podList){
+                System.out.println(pod);
                 startPod(pod.getPodId());
                 podMapper.updateIpPortByPodName(K8sApi.getIp(pod.getPodName()),pod.getPodName());
             }
@@ -310,12 +311,12 @@ public class PodServiceImpl implements PodService {
      */
     @Override
     public void startPod(Integer podId) {
-        Pod pod = podMapper.getPodByPodId(podId);
-        String podName = pod.getPodName();
-        String image = pod.getImage();
-        String volume = pod.getDirSrc();
-        PodTypeEnums podTypeEnum = Int2PodTypeConverter.convert(pod.getType());
         if(!podMapper.getExistByPodId(podId)){
+            Pod pod = podMapper.getPodByPodId(podId);
+            String podName = pod.getPodName();
+            String image = pod.getImage();
+            String volume = pod.getDirSrc();
+            PodTypeEnums podTypeEnum = Int2PodTypeConverter.convert(pod.getType());
             commonCreatePod(podName,image,volume,podTypeEnum,null);
             podMapper.updateExistByPodId(true,pod.getPodId());
             podMapper.updateIpPortByPodName(K8sApi.getIp(podName),podName);

@@ -138,26 +138,42 @@ public class ProjectController {
     /**
      * 用户跳转到单个python容器上传项目的界面
      *
+     * @param session session
      * @return ModelAndView
      */
     @ApiOperation(value = "用户跳转到单个python容器上传项目的界面")
     @GetMapping(value = "/python_upload_file")
-    public ModelAndView pythonFileUpload() {
+    public ModelAndView pythonFileUpload(HttpSession session) {
+        String roleName1 = "用户";
+        String rN = (String) session.getAttribute("roleName");
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("pythonFileUpload");
-        return mv;
+        if( roleName1.equals(rN)){
+            mv.setViewName("pythonFileUpload");
+            return mv;
+        }else{
+            mv.setViewName("../404");
+            return mv;
+        }
     }
 
     /**
      * 用户跳转到单个net容器上传项目的界面
      *
+     * @param session session
      * @return ModelAndView
      */
     @ApiOperation(value = "用户跳转到单个net容器上传项目的界面")
     @GetMapping(value = "/net_upload_file")
-    public ModelAndView netFileUpload() {
+    public ModelAndView netFileUpload(HttpSession session) {
+        String roleName1 = "用户";
+        String rN = (String) session.getAttribute("roleName");
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("netFileUpload");
-        return mv;
+        if( roleName1.equals(rN)){
+            mv.setViewName("netFileUpload");
+            return mv;
+        }else{
+            mv.setViewName("../404");
+            return mv;
+        }
     }
 }

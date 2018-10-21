@@ -7,9 +7,27 @@
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:mybatis-config.xml</param-value>
+        <param-value>classpath:mybatis-config.xml,classpath:spring/spring-dao.xml,classpath:spring/spring-service.xml</param-value>
     </context-param>
 
+    <context-param>
+        <param-name>logbackConfigLocation</param-name>
+        <param-value>classpath:logback.xml</param-value>
+    </context-param>
+
+    <!-- spring监听器 -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>team.cloud.platform.listener.PodStartAndStopSessionListener</listener-class>
+    </listener>
+
+    <!-- 防止spring内存溢出监听器，比如quartz -->
+    <listener>
+        <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+    </listener>
 
     <!-- spring mvc servlet-->
     <servlet>
@@ -27,16 +45,6 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-    <!-- spring监听器 -->
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-
-    <!-- 防止spring内存溢出监听器，比如quartz -->
-    <listener>
-        <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
-    </listener>
-
     <listener>
         <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
     </listener>
@@ -44,11 +52,6 @@
     <listener>
         <listener-class>ch.qos.logback.ext.spring.web.LogbackConfigListener</listener-class>
     </listener>
-
-    <context-param>
-        <param-name>logbackConfigLocation</param-name>
-        <param-value>classpath:logback.xml</param-value>
-    </context-param>
 
     <!-- 连接池 启用 Web 监控统计功能    start-->
     <filter>
@@ -139,10 +142,6 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-    <listener>
-        <listener-class>team.cloud.platform.listener.PodStartAndStopSessionListener</listener-class>
-    </listener>
-
     <!-- 跨域请求 -->
     <filter>
         <filter-name>SimpleCORSFilter</filter-name>
@@ -167,6 +166,10 @@
     </error-page>
     <error-page>
         <error-code>405</error-code>
-        <location>/WEB-INF/405.html</location>
+        <location>/WEB-INF/404.html</location>
+    </error-page>
+    <error-page>
+        <error-code>400</error-code>
+        <location>/WEB-INF/404.html</location>
     </error-page>
 </web-app>

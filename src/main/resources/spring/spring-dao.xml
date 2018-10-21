@@ -5,6 +5,8 @@
     http://www.springframework.org/schema/beans/spring-beans.xsd
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="team.cloud.platform.dao"/>
     <!-- 配置整合mybatis过程 -->
     <!-- 1.配置数据库相关参数properties的属性：${url} -->
     <bean class="team.cloud.platform.utils.EncryptPropertyPlaceholderConfigurer">
@@ -57,9 +59,9 @@
     </bean>
 
     <bean id="log-filter" class="com.alibaba.druid.filter.logging.Slf4jLogFilter">
-    <property name="dataSourceLogEnabled" value="true" />
-    <property name="statementExecutableSqlLogEnable" value="true" />
-</bean>
+        <property name="dataSourceLogEnabled" value="true" />
+        <property name="statementExecutableSqlLogEnable" value="true" />
+    </bean>
 
     <!-- 3.配置SqlSessionFactory对象 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

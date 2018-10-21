@@ -25,6 +25,7 @@ import java.util.Set;
 public class PodStartAndStopSessionListener implements HttpSessionListener,ServletContextListener {
 
     private static final Logger logger = LoggerFactory.getLogger(PodStartAndStopSessionListener.class);
+
     private PodMapper podMapper;
 
     private PodService podService;
@@ -50,23 +51,29 @@ public class PodStartAndStopSessionListener implements HttpSessionListener,Servl
     }
 
     @Override
-    public void sessionDestroyed(HttpSessionEvent httpSessionEvent) {
+    public void sessionDestroyed(HttpSessionEvent httpSessionEvent){
         Integer userId = (Integer)httpSessionEvent.getSession().getAttribute("userId");
-        podService = WebApplicationContextUtils.getWebApplicationContext(httpSessionEvent.getSession().getServletContext()).getBean(PodService.class);
-        podMapper = WebApplicationContextUtils.getWebApplicationContext(httpSessionEvent.getSession().getServletContext()).getBean(PodMapper.class);
-        List<Integer> idList = podMapper.listPodIdByUserId(userId);
-        if(idList!=null){
-            for(Integer podId:idList){
-                podService.stopPod(podId);
-            }
-        }
+
         Set<String> onlineUserSet = (Set<String>)application.getAttribute("onlineUserSet");
         String userName = ((User)httpSessionEvent.getSession().getAttribute("user")).getUserName();
         onlineUserSet.remove(userName);
         application.setAttribute("onlineUserSet", onlineUserSet);
         onlineUserSet = (Set<String>)application.getAttribute("onlineUserSet");
         logger.info(onlineUserSet.toString());
-        logger.info(userName + "超时退出");
+        logger.info(userName + "退出");
         logger.info("session destroy");
+        try{
+            podService = WebApplicationContextUtils.getWebApplicationContext(httpSessionEvent.getSession().getServletContext()).getBean(PodService.class);
+            podMapper = WebApplicationContextUtils.getWebApplicationContext(httpSessionEvent.getSession().getServletContext()).getBean(PodMapper.class);
+            List<Integer> idList = podMapper.listPodIdByUserId(userId);
+
+            if(idList!=null){
+                for(Integer podId:idList){
+                    podService.stopPod(podId);
+                }
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
     }
 }

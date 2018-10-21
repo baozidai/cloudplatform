@@ -62,7 +62,12 @@ public enum ResultEnums {
     /**
      * 当前资源已满，请稍后尝试
      */
-    HOST_LIMIT(11, "当前资源已满，请稍后尝试")
+    HOST_LIMIT(11, "当前资源已满，请稍后尝试"),
+
+    /**
+     * 登录过期，请重新登录
+     */
+    LOGIN_EXPIRATION(12, "登录过期，请重新登录")
     ;
     private Integer code;
 

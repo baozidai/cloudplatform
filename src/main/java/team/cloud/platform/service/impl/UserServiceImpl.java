@@ -71,8 +71,9 @@ public class UserServiceImpl implements UserService {
 
             onlineUserSet = (Set)application.getAttribute("onlineUserSet");
             if(true){
-                session.setAttribute("userId", user.getUserId());
+                session.setAttribute("userId", userId);
                 session.setAttribute("user", user);
+                session.setAttribute("roleName", roleName);
                 onlineUserSet.add(userName);
                 application.setAttribute("onlineUserList", onlineUserSet);
                 return roleName;

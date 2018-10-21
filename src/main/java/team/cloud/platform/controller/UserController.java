@@ -84,12 +84,19 @@ public class UserController {
      * 根据角色查询所有用户数据
      *
      * @param roleName 角色类型
+     * @param session session
      * @return 用户集合
      */
     @ApiOperation(value = "根据角色查询所有用户数据")
     @GetMapping()
-    public Result listUser(@RequestParam("roleName") String roleName) {
-        return ResultUtil.success(ResultEnums.COMMON_SUCCESS, userService.listAllUser(roleName));
+    public Result listUser(@RequestParam("roleName") String roleName, HttpSession session) {
+        String roleName1 = "管理员";
+        String rN = (String) session.getAttribute("roleName");
+        if( roleName1.equals(rN)){
+            return ResultUtil.success(ResultEnums.COMMON_SUCCESS, userService.listAllUser(roleName));
+        }else{
+            return ResultUtil.error(ResultEnums.COMMON_FAIL);
+        }
     }
 
     /**
@@ -189,27 +196,44 @@ public class UserController {
     /**
      * 管理员跳转到用户列表
      *
+     * @param session session
      * @return ModelAndView
      */
     @ApiOperation(value = "管理员跳转到用户列表")
     @GetMapping(value = "/user_list")
-    public ModelAndView userList() {
+    public ModelAndView userList(HttpSession session) {
+        String roleName1 = "管理员";
+        String rN = (String) session.getAttribute("roleName");
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("adminUserList");
-        return mv;
+        if( roleName1.equals(rN)){
+
+            mv.setViewName("adminUserList");
+            return mv;
+        }else{
+            mv.setViewName("../404");
+            return mv;
+        }
     }
 
     /**
      * 管理员跳转到管理员列表
      *
+     * @param session session
      * @return ModelAndView
      */
     @ApiOperation(value = "管理员跳转到管理员列表")
     @GetMapping(value = "/admin_list")
-    public ModelAndView adminList() {
+    public ModelAndView adminList(HttpSession session) {
+        String roleName1 = "管理员";
+        String rN = (String) session.getAttribute("roleName");
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("adminList");
-        return mv;
+        if( roleName1.equals(rN)){
+            mv.setViewName("adminList");
+            return mv;
+        }else{
+            mv.setViewName("../404");
+            return mv;
+        }
     }
 
     /**
