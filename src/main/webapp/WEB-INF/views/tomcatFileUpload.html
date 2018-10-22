@@ -212,7 +212,7 @@
                             example_dropzone = $("#advancedDropzone").dropzone({
                                 url: '/projects/upload',
                                 maxFilesize: 80,
-                                paramName: "file",
+                                paramName: "filename",
                                 acceptedFiles: ".zip",
                                 // Events
 
@@ -248,7 +248,7 @@
                                 },
 
                                 error: function (file) {
-                                    file.fileEntryTd.find('td:last').html('<span class="text-danger">file.msg</span>');
+                                    file.fileEntryTd.find('td:last').html('<span class="text-danger">上传失败</span>');
                                     file.progressBar.removeClass('progress-bar-warning').addClass('progress-bar-red');
                                 }
                             });

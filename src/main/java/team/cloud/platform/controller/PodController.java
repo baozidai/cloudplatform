@@ -93,13 +93,14 @@ public class PodController {
      * @param image 镜像
      * @param podType 容器类型
      * @param session session
+     * @param multipartFile 文件
      * @return 结果集
      */
     @ApiOperation(value = "通用创建容器方法(需要上传项目文件)")
     @PostMapping(value = "/projects")
     public Result commonCreatePod(@RequestParam("image") String image,
                                         @RequestParam("podType") Integer podType,
-                                        @RequestParam("file") MultipartFile multipartFile,
+                                        @RequestParam("filename") MultipartFile multipartFile,
                                         HttpSession session){
         Integer userId = (Integer) session.getAttribute("userId");
         PodTypeEnums podTypeEnum = Int2PodTypeConverter.convert(podType);

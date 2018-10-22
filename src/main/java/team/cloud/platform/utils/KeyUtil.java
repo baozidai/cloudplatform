@@ -15,6 +15,6 @@ public class KeyUtil {
         Random random = new Random();
         Integer number = random.nextInt(90000) + 10000;
 
-        return "cloud" + System.currentTimeMillis() + String.valueOf(number);
+        return System.currentTimeMillis() + String.valueOf(number);
     }
 }

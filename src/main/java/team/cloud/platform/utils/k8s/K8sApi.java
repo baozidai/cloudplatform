@@ -207,25 +207,24 @@ public class K8sApi {
     public static String runService(String name, Integer port) {
         JSONObject response;
         String test;
-        test="{\n" +
-                "  \"apiVersion\": \"v1\",\n" +
-                "  \"kind\": \"Service\",\n" +
-                "  \"metadata\": {\n" +
-                "    \"name\": \"" + name + "\"\n" +
-                "  },\n" +
-                "  \"spec\": {\n" +
-                "    \"ports\": [\n" +
-                "      {\n" +
-                "        \"name\": \"" + name + "\",\n" +
-                "        \"port\": "+ port +",\n" +
-                "        \"targetPort\": " + port + "\n" +
-                "      }\n" +
-                "    ],\n" +
-                "    \"selector\": {\n" +
-                "      \"app\": \"" + name + "\"\n" +
-                "    },\n" +
-                "    \"type\": \"NodePort\"\n" +
-                "  }\n" +
+        test="{\r\n" +
+                "  \"apiVersion\": \"v1\",\r\n" +
+                "  \"kind\": \"Service\",\r\n" +
+                "  \"metadata\": {\r\n" +
+                "    \"name\": \""+name+"\"\r\n" +
+                "  },\r\n" +
+                "  \"spec\": {\r\n" +
+                "    \"type\": \"NodePort\",\r\n" +
+                "    \"ports\": [\r\n" +
+                "      {\r\n" +
+                "        \"port\": "+port+",\r\n" +
+                "        \"targetPort\": "+port+"\r\n" +
+                "      }\r\n" +
+                "    ],\r\n" +
+                "    \"selector\": {\r\n" +
+                "      \"name\": \""+name+"\"\r\n" +
+                "    }\r\n" +
+                "  }\r\n" +
                 "}";
         response = JerseyClient.restPost(JerseyClient.getServiceApi(),test);
         try {

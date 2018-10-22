@@ -30,7 +30,7 @@ public class FileServiceImpl implements FileService {
     public String unzipProjectFile(MultipartFile multipartFile, String path1, String path2) throws IOException, ZipException {
         //项目压缩包完整路径
         String projectZipPath = path2 + "/" + multipartFile.getOriginalFilename();
-
+        Runtime.getRuntime().exec("chmod 777 -R " + path1);
         File appZip = new File(projectZipPath);
         if (!appZip.getParentFile().exists()) {
             appZip.getParentFile().mkdirs();
@@ -49,6 +49,7 @@ public class FileServiceImpl implements FileService {
         String fileName = null;
         if(!path1.equals(path2)){
             File[] files = file.listFiles();
+            assert files != null;
             Integer length = files.length;
             if(length==1){
                 fileName = files[0].getName();
@@ -103,9 +104,12 @@ public class FileServiceImpl implements FileService {
             //声明目录下所有的文件 files[];
             File[] files = file.listFiles();
             //遍历目录下所有的文件
-            for (int i = 0;i < files.length;i ++) {
+            int i = 0;
+            assert files != null;
+            while (i < files.length) {
                 //把每个文件用这个方法进行迭代
                 this.deleteFile(files[i]);
+                i++;
             }
             //删除文件夹
             return file.delete();

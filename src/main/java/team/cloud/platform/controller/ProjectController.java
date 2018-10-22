@@ -40,7 +40,7 @@ public class ProjectController {
     @ApiOperation(value = "通用上传项目方法")
     @PostMapping(value = "/upload")
     public Result commonUploadProject(HttpSession session,
-                                      @RequestParam("file") MultipartFile multipartFile){
+                                      @RequestParam("filename") MultipartFile multipartFile){
         Integer podId = (Integer) session.getAttribute("uploadPodId");
         try{
             return ResultUtil.success(ResultEnums.COMMON_SUCCESS, projectService.commonUploadProject(podId, multipartFile));

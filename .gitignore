@@ -17,3 +17,5 @@ cloudplatform.iml
 logs/
 src/test/
 target/
+.idea/webContexts.xml
+src/main/webapp/views/

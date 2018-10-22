@@ -207,16 +207,14 @@
 
                 <script type="text/javascript">
                     jQuery(document).ready(function ($) {
-                        var i = 1,
+                        var i = 1;
+                        var image = "10.2.132.171:5000/python:1.0";
+                        var podType = 3,
                             $example_dropzone_filetable = $("#example-dropzone-filetable"),
                             example_dropzone = $("#advancedDropzone").dropzone({
-                                url: '/pods/projects',
-                                data:{
-                                    image: "10.2.132.171:5000/python:1.0",
-                                    podType: 4
-                                },
+                                url: '/pods/projects?' + 'image=' + image + '&podType=' + podType,
                                 maxFilesize: 80,
-                                paramName: "file",
+                                paramName: "filename",
                                 acceptedFiles: ".zip",
                                 // Events
 
@@ -257,7 +255,7 @@
                                 },
 
                                 error: function (file) {
-                                    file.fileEntryTd.find('td:last').html('<span class="text-danger">file.msg</span>');
+                                    file.fileEntryTd.find('td:last').html('<span class="text-danger">上传失败</span>');
                                     file.progressBar.removeClass('progress-bar-warning').addClass('progress-bar-red');
                                 }
                             });

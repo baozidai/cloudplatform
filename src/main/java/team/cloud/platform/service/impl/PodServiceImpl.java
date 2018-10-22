@@ -61,11 +61,11 @@ public class PodServiceImpl implements PodService {
     @Override
     public Pod insertPod(Integer userId, String image, PodTypeEnums podType) {
         Pod pod = new Pod();
-        String podName = podType + KeyUtil.genUniqueKey();
+        String podName =  podType.getDescription().toLowerCase() + KeyUtil.genUniqueKey();
         User user = userService.getUserByUserId(userId);
         //容器目录，即挂载位置
         String storeLocation = CommonConstants.storeLocation;
-        String volume = storeLocation + user.getUserName() + "/" + podName;
+        String volume = storeLocation + user.getUserName() + "/" + podType + "/" + podName;
         pod.setUserId(userId);
         pod.setPodName(podName);
         pod.setType(podType.getCode());
@@ -367,11 +367,11 @@ public class PodServiceImpl implements PodService {
         Integer podType = PodTypeEnums.PHP.getCode();
         int i = podMapper.countPodByUserIdAndType(userId, podType);
         if(i<1){
-            return false;
-        }else {
             PodTypeEnums podTypeEnum = Int2PodTypeConverter.convert(podType);
             commonCreatePod(userId, image, podTypeEnum);
             return true;
+        }else {
+            return false;
         }
     }
 }
