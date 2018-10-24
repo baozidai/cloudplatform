@@ -30,12 +30,12 @@ public class FileServiceImpl implements FileService {
     public String unzipProjectFile(MultipartFile multipartFile, String path1, String path2) throws IOException, ZipException {
         //项目压缩包完整路径
         String projectZipPath = path2 + "/" + multipartFile.getOriginalFilename();
-        Runtime.getRuntime().exec("chmod 777 -R " + path1);
         File appZip = new File(projectZipPath);
         if (!appZip.getParentFile().exists()) {
             appZip.getParentFile().mkdirs();
         }
-        if(!path1.equals(path2)){
+        int max = 83886080;
+        if(!multipartFile.isEmpty() && multipartFile.getSize()< max){
             multipartFile.transferTo(appZip);
         }
         //开始解压

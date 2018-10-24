@@ -28,6 +28,14 @@ public interface ProjectService {
     int deleteProjectByProjectId(Integer projectId);
 
     /**
+     * 根据podName删除一条用户项目数据
+     *
+     * @param podName podName
+     * @return 删除成功条数
+     */
+    int deleteProjectByPodName(String podName);
+
+    /**
      * 查询一个用户的项目通过podName
      *
      * @param podName 容器名

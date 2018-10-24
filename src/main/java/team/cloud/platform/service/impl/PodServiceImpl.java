@@ -90,20 +90,21 @@ public class PodServiceImpl implements PodService {
     @Override
     public void deletePod(Integer podId) {
         Pod pod = podMapper.getPodByPodId(podId);
-        //1.删除数据库信息
-        podMapper.deletePodByPodId(podId);
         if(podMapper.getExistByPodId(podId)){
-            //2.删除app 3.删除硬盘数据
+            //1.删除app 2.删除硬盘数据
             if (!K8sApi.delete(JerseyClient.getPodApi(), pod.getPodName()) || !K8sApi.delete(JerseyClient.getServiceApi(), pod.getPodName()) || !fileService.deleteFile(new File(pod.getDirSrc()))){
                 throw new CommonException(ResultEnums.POD_DELETE_FAIL);
             }
         }
         else{
-            //2.删除硬盘数据
+            //1.删除硬盘数据
             if (!K8sApi.delete(JerseyClient.getServiceApi(), pod.getPodName()) || !fileService.deleteFile(new File(pod.getDirSrc()))){
                 throw new CommonException(ResultEnums.POD_DELETE_FAIL);
             }
         }
+        //3/2.删除数据库信息
+        podMapper.deletePodByPodId(podId);
+        projectMapper.deleteProjectByPodName(pod.getPodName());
     }
 
     /**
@@ -225,7 +226,7 @@ public class PodServiceImpl implements PodService {
         try {
             //2.解压项目
 
-            String projectDirSrc = pod.getDirSrc() + "/" +KeyUtil.genUniqueKey();
+            String projectDirSrc = pod.getDirSrc();
             fileService.unzipProjectFile(multipartFile,projectDirSrc,pod.getDirSrc());
             //3.创建容器
             commonCreatePod(pod.getPodName(),image,projectDirSrc,podType,null);
@@ -233,7 +234,8 @@ public class PodServiceImpl implements PodService {
             podMapper.updateIpPortByPodName(K8sApi.getIp(pod.getPodName()), pod.getPodName());
             //3.项目信息写入数据库
             Project project = new Project();
-            project.setProjectName(multipartFile.getOriginalFilename());
+            String originalFilename = multipartFile.getOriginalFilename();
+            project.setProjectName(originalFilename.substring(0, originalFilename.indexOf(".")));
             project.setPodName(pod.getPodName());
             project.setProjectAddress(projectDirSrc);
             projectMapper.insertProject(project);

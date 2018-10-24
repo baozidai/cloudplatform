@@ -9,6 +9,7 @@ import team.cloud.platform.dao.PodMapper;
 import team.cloud.platform.dao.ProjectMapper;
 import team.cloud.platform.entity.Pod;
 import team.cloud.platform.entity.Project;
+import team.cloud.platform.enums.PodTypeEnums;
 import team.cloud.platform.enums.ResultEnums;
 import team.cloud.platform.exception.CommonException;
 import team.cloud.platform.service.FileService;
@@ -65,6 +66,17 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     /**
+     * 根据podName删除一条用户项目数据
+     *
+     * @param podName podName
+     * @return 删除成功条数
+     */
+    @Override
+    public int deleteProjectByPodName(String podName) {
+        return projectMapper.deleteProjectByPodName(podName);
+    }
+
+    /**
      * 查询一个用户的项目通过podName
      *
      * @param podName 容器名
@@ -91,6 +103,7 @@ public class ProjectServiceImpl implements ProjectService {
         try {
             //2.在项目目录下解压
             String change = fileService.unzipProjectFile(multipartFile, projectPath,path);
+            Runtime.getRuntime().exec("chmod 777 -R " + change);
             System.out.println(change);
             //3.插入项目表信息
             Project project = new Project();

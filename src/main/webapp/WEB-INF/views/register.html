@@ -164,8 +164,8 @@
                                             layer.close(index);
                                             // Redirect after successful login page (when progress bar reaches 100%)
                                             if (resp.code == 4) {
-                                                layer.msg(" 注册成功！即将跳转",{time: 1000, icon:1,end:function(){
-                                                    window.location.href = 'index.html';}});
+                                                layer.msg("注册成功！即将跳转",{time: 1000, icon:1,end:function(){
+                                                        window.location.href = 'index.html';}});
                                             }
                                         }
                                     });
@@ -182,7 +182,7 @@
 													<span aria-hidden="true">&times;</span>\
 													<span class="sr-only">取消</span>\
 												</button>\
-												' + resp.msg + '\
+												' + "注册成功！即将跳转" + '\
 											</div>');
                                     }else {
                                         $(".errors-container").html('<div class="alert alert-danger">\

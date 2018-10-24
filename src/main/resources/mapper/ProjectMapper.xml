@@ -25,6 +25,11 @@
         WHERE project_id = #{projectId,jdbcType=INTEGER}
     </delete>
 
+    <delete id="deleteProjectByPodName">
+        DELETE FROM project
+        WHERE pod_name = #{podName,jdbcType=VARCHAR}
+    </delete>
+
     <insert id="insertProject" useGeneratedKeys="true" keyProperty="project_id" parameterType="project">
         INSERT INTO project (
             pod_name,

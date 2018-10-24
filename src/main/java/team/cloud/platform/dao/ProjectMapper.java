@@ -46,6 +46,14 @@ public interface ProjectMapper {
     int deleteProjectByProjectId(@Param("projectId") Integer projectId);
 
     /**
+     * 根据podName删除一条用户项目数据
+     *
+     * @param podName podName
+     * @return 删除成功条数
+     */
+    int deleteProjectByPodName(@Param("podName") String podName);
+
+    /**
      * 插入一条完整的用户项目数据，id自增长
      *
      * @param project 项目
