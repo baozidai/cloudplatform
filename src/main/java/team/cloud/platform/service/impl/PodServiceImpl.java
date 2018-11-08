@@ -41,6 +41,8 @@ public class PodServiceImpl implements PodService {
     @Autowired
     private PodMapper podMapper;
     @Autowired
+    private UserMapper userMapper;
+    @Autowired
     private NetService netService;
     @Autowired
     private FileService fileService;
@@ -376,4 +378,25 @@ public class PodServiceImpl implements PodService {
             return false;
         }
     }
+
+    /**
+     * 获取所有用户的姓名
+     *
+     * @param userName 姓名
+     * @return pod集合
+     */
+    @Override
+    public List<Pod> getUserPods(String userName) {
+        Integer userId = userMapper.getUserByUserName(userName).getUserId();
+        List<Integer> podIds = podMapper.listPodIdByUserId(userId);
+        List<Pod> pods = new ArrayList<>();
+
+        for(Integer podId:podIds){
+            Pod pod = podMapper.getPodByPodId(podId);
+            pods.add(pod);
+        }
+        return pods;
+    }
+
+
 }

@@ -153,4 +153,12 @@ public interface PodService {
      * @return Boolean
      */
     Boolean createPhpPod(Integer userId);
+
+    /**
+     * 获取所有用户的姓名
+     *
+     * @param userName 姓名
+     * @return pod集合
+     */
+    List<Pod> getUserPods(String userName);
 }

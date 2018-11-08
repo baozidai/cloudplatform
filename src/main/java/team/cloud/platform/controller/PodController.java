@@ -366,4 +366,17 @@ public class PodController {
             return mv;
         }
     }
+
+
+    /**
+     * 查询某个用户pod
+     *
+     * @param userName 用户名
+     * @return 项目集合
+     */
+    @ApiOperation(value = "查询某个用户所有的项目")
+    @GetMapping(value = "/users")
+    public Result userProjects(@RequestParam("userName") String userName){
+        return ResultUtil.success(podService.getUserPods(userName));
+    }
 }

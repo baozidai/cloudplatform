@@ -15,4 +15,9 @@ public interface CommonConstants {
      * api版本号
      */
     String API_PREFIX = "/api_v1";
+
+    /**
+     * IOT
+     */
+    String IOT = "iot";
 }
