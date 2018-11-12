@@ -177,7 +177,7 @@ public class UserController {
     public ModelAndView logout(HttpSession session) {
         // 清除session
         session.invalidate();
-        return new ModelAndView("redirect:/");
+        return new ModelAndView("");
     }
 
     /**

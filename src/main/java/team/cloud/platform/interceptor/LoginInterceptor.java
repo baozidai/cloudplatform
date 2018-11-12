@@ -37,7 +37,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         String userId = "userId";
         if((session==null)) {
             logger.info("未登录，session为空，不放行");
-            response.sendRedirect("/");
+            response.sendRedirect(request.getContextPath()+"/");
             return false;
         }
         else {
@@ -46,7 +46,7 @@ public class LoginInterceptor implements HandlerInterceptor {
                 return true;
             }
             logger.info("登录失效，不放行");
-            response.sendRedirect("/");
+            response.sendRedirect(request.getContextPath()+"/");
             return false;
         }
 
