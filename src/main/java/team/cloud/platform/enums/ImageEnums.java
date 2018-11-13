@@ -32,7 +32,7 @@ public enum ImageEnums {
     /**
      * mysql镜像
      */
-    MYSQL(5,"10.2.132.171:5000/mysql:1.0")
+    MYSQL(5,"10.2.132.171:5000/mysql:1.1")
     ;
 
     /**

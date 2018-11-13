@@ -70,7 +70,7 @@ public class UserServiceImpl implements UserService {
             Set<String> onlineUserSet = new HashSet<String>();
 
             onlineUserSet = (Set)application.getAttribute("onlineUserSet");
-            if(true){
+            if(podService.countPodByExist()<=16 || "管理员".equals(roleName)){
                 session.setAttribute("userId", userId);
                 session.setAttribute("user", user);
                 session.setAttribute("roleName", roleName);
