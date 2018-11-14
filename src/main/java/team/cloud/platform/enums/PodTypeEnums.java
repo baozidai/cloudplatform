@@ -27,12 +27,7 @@ public enum PodTypeEnums {
     /**
      * .netWeb类型
      */
-    NET(4,"net"),
-
-    /**
-     * mysql数据库
-     */
-    MYSQL(5,"mysql")
+    NET(4,"net")
     ;
 
     /**

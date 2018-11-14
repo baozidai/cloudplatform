@@ -272,7 +272,6 @@
                                             "                            </button>\n" +
                                             "                            <ul class=\"dropdown-menu\">\n" +
                                             "                                <li><a onclick=\"addContainer(this)\">10.2.132.171:5000/tomcat:1.0</a></li>\n" +
-                                            "                                <li><a onclick=\"addContainer(this)\">10.2.132.171:5000/mysql:1.0</a></li>\n" +
                                             "                                <li><a onclick=\"addContainer(this)\">10.2.132.171:5000/php:1.0</a></li>\n" +
                                             "                            </ul>\n" +
                                             "                        </div><a id='lookProgramme' onclick=\"lookProgramme(this)\"  class=\"btn btn-secondary btn-sm btn-icon icon-left\" style=\"margin: 2px\">用户容器</a>"
@@ -798,8 +797,6 @@
             type = 1;
         }else if(dataImage == "10.2.132.171:5000/php:1.0"){
             type = 2;
-        }else if(dataImage == "10.2.132.171:5000/mysql:1.0"){
-            type = 5;
         }
 
         layer.confirm('确认新增'+dataImage+'容器？', {

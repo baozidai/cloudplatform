@@ -14,6 +14,7 @@ import team.cloud.platform.enums.PodTypeEnums;
 import team.cloud.platform.enums.ResultEnums;
 import team.cloud.platform.enums.RoleEnums;
 import team.cloud.platform.exception.CommonException;
+import team.cloud.platform.service.FileService;
 import team.cloud.platform.service.PodService;
 import team.cloud.platform.service.UserService;
 
@@ -114,7 +115,6 @@ public class UserServiceImpl implements UserService {
         }
         if(roleName.equals(RoleEnums.USER.getDescription())){
             podService.commonCreatePod(userId, ImageEnums.TOMCAT.getDescription(), PodTypeEnums.TOMCAT);
-            podService.commonCreatePod(userId, ImageEnums.MYSQL.getDescription(), PodTypeEnums.MYSQL);
             List<Integer> idList = podMapper.listPodIdByUserId(userId);
 
             if(idList!=null){

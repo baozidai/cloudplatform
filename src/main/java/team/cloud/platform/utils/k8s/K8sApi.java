@@ -178,9 +178,6 @@ public class K8sApi {
             case NET:
                 text = netJson(name, image, volume, dllName);
                 break;
-            case MYSQL:
-                text = mysqlJson(name, image, volume);
-                break;
             default:
                 throw new CommonException(ResultEnums.UNSUPPORTED_POD_TYPE);
         }
@@ -337,15 +334,7 @@ public class K8sApi {
         return phpJson;
     }
 
-    /**
-     * mysqlJson文件
-     *
-     * @param name 名称
-     * @param image 镜像
-     * @param volume 存储
-     * @return json文本的String形式
-     */
-    private static String mysqlJson(String name, String image, String volume) {
+    /*private static String mysqlJson(String name, String image, String volume) {
         String mysqlJson;
         mysqlJson = "{\r\n" +
                 "  \"apiVersion\": \"v1\",\r\n" +
@@ -391,7 +380,7 @@ public class K8sApi {
                 "  }\r\n" +
                 "}";
         return mysqlJson;
-    }
+    }*/
 
     /**
      * netJson文件

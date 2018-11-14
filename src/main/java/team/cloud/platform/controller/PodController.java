@@ -12,6 +12,7 @@ import team.cloud.platform.enums.PodTypeEnums;
 import team.cloud.platform.enums.ResultEnums;
 import team.cloud.platform.exception.CommonException;
 import team.cloud.platform.service.PodService;
+import team.cloud.platform.service.UserService;
 import team.cloud.platform.utils.web.ResultUtil;
 
 import javax.servlet.http.HttpSession;
@@ -28,6 +29,9 @@ public class PodController {
     @Autowired
     private PodService podService;
 
+    @Autowired
+    private UserService userService;
+
     /**
      * 根据用户id和容器类型查询容器信息
      *
@@ -39,13 +43,7 @@ public class PodController {
     @ApiOperation(value = "根据用户id和容器类型查询容器信息")
     @GetMapping(value = "/users/{userId}")
     public Result listPodByUserIdAndType(@PathVariable("userId") Integer userId, @RequestParam("podType") Integer type, HttpSession session){
-        Integer uI = (Integer) session.getAttribute("userId");
-        if(!userId.equals(uI)){
-            return ResultUtil.error(ResultEnums.COMMON_FAIL);
-        }
-        else{
-            return ResultUtil.success(ResultEnums.COMMON_SUCCESS, podService.listPodByUserIdAndType(userId, type));
-        }
+        return ResultUtil.success(ResultEnums.COMMON_SUCCESS, podService.listPodByUserIdAndType(userId, type));
     }
 
     /**

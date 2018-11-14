@@ -169,33 +169,6 @@
 
         </nav>
 
-        <script type="text/javascript">
-            jQuery(document).ready(function($)
-            {
-
-                // Realtime Network Stats
-                var i = 0,
-                    rns_values = [130,150],
-                    rns2_values = [39,50],
-                    realtime_network_stats = [];
-
-                for(i=0; i<=100; i++)
-                {
-                    realtime_network_stats.push({ id: i, x1: between(rns_values[0], rns_values[1]), x2: between(rns2_values[0], rns2_values[1])});
-                }
-
-
-
-
-                function between(randNumMin, randNumMax)
-                {
-                    var randInt = Math.floor((Math.random() * ((randNumMax + 1) - randNumMin)) + randNumMin);
-
-                    return randInt;
-                }
-            });
-        </script>
-
         <div class="row">
             <div class="col-sm-10 col-sm-offset-1">
                 <div class="chart-item-bg">
@@ -203,113 +176,31 @@
                         <div style="margin-bottom: 15px">
                             <div class="h3 text-secondary text-bold">数据库地址<span style="margin-left: 5px" class="text-medium text-muted">Database Address</span></div>
                         </div>
-                        <script type="text/javascript">
-                            //                                     var dataSet={"data":[
-                            //                                         {"id":"1",
-                            //                                             "containerName":"webkiet",
-                            //                                             "mirror": "ahsdkjashd",
-                            //                                             "address": "ahsdkjashd"},
-                            //                                         {"id":"2",
-                            //                                             "containerName":"webkiet",
-                            //                                             "mirror": "ahsdkjashd",
-                            //                                             "address": "ahsdkjashd"}
-                            //                                             ]}
-                            //                                        ;
 
-                            jQuery(document).ready(function($) {
-                                var userId = getUserSession().userId;
-                                var selected = [];
-                                $("#example-2").dataTable({
-//                                             "data": dataSet.data,//数据源
-                                    "sDom": '<"top"f>t<"bottom"pi>',
-                                    "bSort": false, //排序功能
-                                    "pageLength":9,
-//                                    searching: false,
-                                    "ajax": {
-                                        "url":"/pods/users/"+ userId,
-                                        "dataType":"json",
-                                        "method":"GET",
-                                        "data":{
-                                            podType: 5
-                                        },
-                                        "dataSrc":
-                                            function(result){
-                                                return result.extend;//自定义数据源，默认为data
-                                            },
-                                    },
-                                    "columns": [
-                                        {  "data":"podId",
-                                            "title": "podId"
-                                        },
-                                        {
-                                            "data":"name",
-                                            "className":'nameInput',
-                                            "title":"名称"
-                                        },
-                                        {
-                                            "data":"image",
-                                            "title":"镜像"
-                                        },
-                                        {
-                                            "data":"ipPort",
-                                            "title":"数据库地址"
-                                        },
-                                        {
-                                            "title":"操作"
-                                        }
-
-                                    ],
-                                    "aoColumnDefs":[
-                                        {
-                                            "targets": -1,
-                                            "class": "but_xq",
-                                            "data": null,
-                                            "bSortable": false,
-                                            "defaultContent": "<a id='checkContainer' onclick='checkContainer(this)' class=\"btn btn-danger btn-sm btn-icon icon-left\" style=\"margin: 2px\">查看容器状态</a><a id='reContainer' onclick='reContainer(this)' class=\"btn btn-info btn-sm btn-icon icon-left\" style=\"margin: 2px\">重启容器</a><button onclick='logs(this)'  data-toggle=\"modal\" data-target=\"#myModal\" class=\"btn btn-gary btn-sm btn-icon icon-left\" style=\"margin: 2px\">查看日志</button>"
-                                        }
-                                    ],
-                                    language: {
-                                        "sProcessing": "处理中...",
-                                        "sLengthMenu": "显示 _MENU_ 项结果",
-                                        "sZeroRecords": "没有匹配结果",
-                                        "sInfo": " 共 _TOTAL_ 项",
-                                        "sInfoEmpty": " 共 0 项",
-                                        "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
-                                        "sInfoPostFix": "",
-                                        "sSearch": "搜索:",
-                                        "sUrl": "",
-                                        "sEmptyTable": "表中数据为空",
-                                        "sLoadingRecords": "载入中...",
-                                        "sInfoThousands": ",",
-                                        "oPaginate": {
-                                            "sFirst": "首页",
-                                            "sPrevious": "<",
-                                            "sNext": ">",
-                                            "sLast": "末页"
-                                        }
-                                    },
-                                    "oAria": {
-                                        "sSortAscending": ": 以升序排列此列",
-                                        "sSortDescending": ": 以降序排列此列"
-                                    }
-
-                                });
-                                $("#name").removeClass("nameInput");
-
-                            });
-                        </script>
                         <div class="table-responsive" style="border: none">
                             <table width="100%" class="table table-bordered table-striped" id="example-2">
                                 <thead>
                                 <tr>
-                                    <th width="15%">podId</th>
-                                    <th id="name"  width="10%">名称</th>
-                                    <th width="15%">镜像</th>
-                                    <th width="20%">链接地址</th>
-                                    <th width="40%">操作</th>
+                                    <th width="100%">为大家提供3个mysql数据库，为大家公用数据库</th>
+                                </tr>
+                                <tr>
+                                    <th width="100%">若存在与你相重复的数据库名，请修改自己的数据库名称，勿删除他人数据库，谢谢</th>
+                                </tr>
+                                <tr>
+                                    <th width="100%">用户名：root     密码：cloud123456</th>
                                 </tr>
                                 </thead>
-                                <tbody class="middle-align"></tbody>
+                                <tbody class="middle-align">
+                                <tr>
+                                    <td>数据库地址1：10.2.132.171:30000</td>
+                                </tr>
+                                <tr>
+                                    <td>数据库地址2：10.2.132.171:30001</td>
+                                </tr>
+                                <tr>
+                                    <td>数据库地址3：10.2.132.171:30002</td>
+                                </tr>
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -322,24 +213,6 @@
 
 <div class="page-loading-overlay">
     <div class="loader-2"></div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="mylogs" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">日志</h4>
-            </div>
-            <div class="modal-body" id="logs_modal-body">
-                <div id="logs"></div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-            </div>
-        </div>
-    </div>
 </div>
 
 
@@ -374,116 +247,6 @@
 <script src="/assets/js/xenon-custom.js"></script>
 
 <script>
-    var val;
-    //修改表格Name
-    $(document).on('click',".nameInput",function(e){
-        var data = $(this).parent().children('td').eq(0).text();
-        if (!$(this).is('.input')) {
-            $(this).addClass('input').html('<input type="text" value="' + $(this).text() + '" />').find('input').focus().blur(function () {
-                $(this).parent().removeClass('input').html($(this).val() || 0);
-                val=$(this).val();
-                $.ajax({
-                    url: '/pods/' + data + '/name',
-                    data: {
-                        name: val
-                    },
-                    type: "PATCH",
-                    async: false,
-                    dataType: "json",
-                    success: function (data) {
-
-                    },
-                    error: function () {
-
-                    }
-                });
-            });
-        }
-
-    });
-
-    function checkContainer(btn) {
-        var data = btn.parentNode.parentNode.firstChild.textContent;
-        //获取查看行的id
-        $.ajax({
-            url:'/pods/' + data + '/status',
-            type: "GET",
-            async:false,
-            dataType:"json",
-            success:function(data){
-                if(data.code == 4){
-                    layer.msg("容器状态："+data.extend)
-                }else{
-                    layer.msg(data.msg)
-                }
-            },
-            error:function(data) {
-                layer.msg(data.msg)
-            }
-        });
-    }
-    function reContainer(btn) {
-        var data =btn.parentNode.parentNode.firstChild.textContent;
-        //获取查看行的id
-        layer.confirm('确认重启容器？', {
-            skin: 'layui-layer-lan',
-            btn: ['确认','取消'] //按钮
-        }, function(){
-            $.ajax({
-                url:'/pods/restart/' + data,
-                type:"PUT",
-                async:false,
-                dataType:"json",
-                success:function(data){
-                    if(data.code == 4){
-                        layer.msg('重启成功', {
-                            time: 1000, end: function () {
-                                window.location.reload();
-                            }
-                        });
-                    }else{
-                        layer.msg(data.msg)
-                    }
-                },
-                error:function (data) {
-                    layer.msg(data.msg)
-                }
-            });   }, function(){
-            layer.msg('已取消')
-        });
-    }
-
-    function logs(btn) {
-        $('#mylogs').modal('show')
-        var data = btn.parentNode.parentNode.firstChild.textContent;
-        $.ajax({
-            url:'/pods/' + data + '/log',
-            type:"GET",
-            async:false,
-            dataType:"json",
-            success:function(data){
-                if(data.code == 4){
-                    onMessage(data);
-                }else{
-                    layer.msg(data.msg)
-                }
-            },
-            error:function (data) {
-                layer.msg(data.msg)
-            }
-        });
-    }
-    function onMessage(e) {
-        writeToScreen('<span style="color: blue;">RESPONSE: '+ e.extend+'</span>');
-    }
-    function writeToScreen(message) {
-        var pre = document.createElement("p");
-        var logs = document.getElementById("logs");
-        pre.style.wordWrap = "break-word";
-        pre.innerHTML = message;
-        logs.appendChild(pre);
-    }
-
     function getUserSession() {
         var value = "";
         $.ajax({

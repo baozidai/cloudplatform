@@ -281,9 +281,6 @@ public class PodServiceImpl implements PodService {
             case TOMCAT:
                 K8sApi.runService(podName, 8080);
                 break;
-            case MYSQL:
-                K8sApi.runService(podName, 3306);
-                break;
             default:
                 K8sApi.runService(podName, 80);
                 break;
