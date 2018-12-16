@@ -24,6 +24,6 @@ public class HostServiceImpl implements HostService {
      */
     @Override
     public Boolean checkHost() {
-        return podService.countPodByExist() <= 16;
+        return podService.countPodByExist() <= 14;
     }
 }

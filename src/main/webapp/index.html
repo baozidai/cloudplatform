@@ -24,8 +24,8 @@
     <script src="/assets/js/respond.min.js"></script>
     <![endif]-->
     <script type="text/javascript">
-        var browser = navigator.appName
-        var b_version = navigator.appVersion
+        var browser = navigator.appName;
+        var b_version = navigator.appVersion;
         var version = b_version.split(";");
         var trim_Version = version[1].replace(/[ ]/g, "");
         if (browser == "Microsoft Internet Explorer" && trim_Version == "MSIE6.0" || browser == "Microsoft Internet Explorer" && trim_Version == "MSIE7.0" || browser == "Microsoft Internet Explorer" && trim_Version == "MSIE8.0") {
@@ -37,6 +37,10 @@
             cursor: pointer;
         }
     </style>
+    <script>
+        var msg = "现已支持spring boot的部署，请使用spring boot的同学点击下载使用说明并认真阅读！";
+        layer.alert("<span style='color: black'>"+ msg +"</span>");
+    </script>
 </head>
 <body class="page-body login-page login-light">
 <div class="login-container">

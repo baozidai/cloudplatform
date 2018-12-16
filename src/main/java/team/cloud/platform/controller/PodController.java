@@ -29,9 +29,6 @@ public class PodController {
     @Autowired
     private PodService podService;
 
-    @Autowired
-    private UserService userService;
-
     /**
      * 根据用户id和容器类型查询容器信息
      *
@@ -279,6 +276,27 @@ public class PodController {
     }
 
     /**
+     * 用户跳转到单个用户jar容器
+     *
+     * @param session session
+     * @return ModelAndView
+     */
+    @ApiOperation(value = "用户跳转到单个用户Jar容器")
+    @GetMapping(value = "/jar")
+    public ModelAndView jar(HttpSession session) {
+        String roleName1 = "用户";
+        String rN = (String) session.getAttribute("roleName");
+        ModelAndView mv = new ModelAndView();
+        if( roleName1.equals(rN)){
+            mv.setViewName("userJar");
+            return mv;
+        }else{
+            mv.setViewName("../404");
+            return mv;
+        }
+    }
+
+    /**
      * 用户跳转到单个用户Python容器
      *
      * @param session session
@@ -364,7 +382,6 @@ public class PodController {
             return mv;
         }
     }
-
 
     /**
      * 查询某个用户pod

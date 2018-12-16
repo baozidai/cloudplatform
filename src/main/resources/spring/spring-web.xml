@@ -35,7 +35,7 @@
     <!-- 2.静态资源默认servlet配置 (1)加入对静态资源的处理：js,gif,png (2)允许使用"/"做整体映射 -->
     <mvc:resources mapping="/resources/**" location="/assets/" />
     <mvc:default-servlet-handler />
-<!--    &lt;!&ndash;向容器自动注入配置&ndash;&gt;
+    <!--&lt;!&ndash;向容器自动注入配置&ndash;&gt;
     <context:annotation-config />
     <context:component-scan base-package="team.cloud.platform.swagger" />
     &lt;!&ndash;重要！将你的SwaggerConfig配置类注入&ndash;&gt;
@@ -43,7 +43,6 @@
     &lt;!&ndash;重要！配置swagger资源不被拦截&ndash;&gt;
     <mvc:resources mapping="swagger-ui.html" location="classpath:/META-INF/resources/" />
     <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/" />-->
-
 
     <!-- 3.定义视图解析器 -->
     <bean id="viewResolver"

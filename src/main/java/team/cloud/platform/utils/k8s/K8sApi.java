@@ -178,6 +178,9 @@ public class K8sApi {
             case NET:
                 text = netJson(name, image, volume, dllName);
                 break;
+            case JAR:
+                text = jarJson(name,image,volume);
+                break;
             default:
                 throw new CommonException(ResultEnums.UNSUPPORTED_POD_TYPE);
         }
@@ -261,6 +264,12 @@ public class K8sApi {
                 "        \"ports\": [\r\n" +
                 "          {\r\n" +
                 "            \"containerPort\": "+8080+"\r\n" +
+                "          }\r\n" +
+                "        ],\r\n" +
+                "        \"env\": [\r\n" +
+                "          {\r\n" +
+                "            \"name\": \"JAVA_OPTS\",\r\n" +
+                "            \"value\": \"-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap\"\r\n" +
                 "          }\r\n" +
                 "        ],\r\n" +
                 "        \"volumeMounts\": [\r\n" +
@@ -488,5 +497,55 @@ public class K8sApi {
                 "  }\r\n" +
                 "}";
         return pythonJson;
+    }
+
+    /**
+     * jarJson文件
+     *
+     * @param name 名称
+     * @param image 镜像
+     * @param volume 存储
+     * @return json文本的String形式
+     */
+    private static String jarJson(String name, String image, String volume) {
+        String jarJson;
+        jarJson = "{\r\n" +
+                "  \"apiVersion\": \"v1\",\r\n" +
+                "  \"kind\": \"Pod\",\r\n" +
+                "  \"metadata\": {\r\n" +
+                "    \"name\": \""+name+"\",\r\n" +
+                "    \"labels\": {\r\n" +
+                "      \"name\": \""+name+"\"\r\n" +
+                "    }\r\n" +
+                "  },\r\n" +
+                "  \"spec\": {\r\n" +
+                "    \"containers\": [\r\n" +
+                "      {\r\n" +
+                "        \"name\": \""+name+"\",\r\n" +
+                "        \"image\": \""+image+"\",\r\n" +
+                "        \"ports\": [\r\n" +
+                "          {\r\n" +
+                "            \"containerPort\": "+80+"\r\n" +
+                "          }\r\n" +
+                "        ],\r\n" +
+                "        \"volumeMounts\": [\r\n" +
+                "          {\r\n" +
+                "            \"mountPath\": \"/test\",\r\n" +
+                "            \"name\": \"test-volume\"\r\n" +
+                "          }\r\n" +
+                "        ]\r\n" +
+                "      }\r\n" +
+                "    ],\r\n" +
+                "    \"volumes\": [\r\n" +
+                "      {\r\n" +
+                "        \"name\": \"test-volume\",\r\n" +
+                "        \"hostPath\": {\r\n" +
+                "          \"path\": \""+volume+"\"\r\n" +
+                "        }\r\n" +
+                "      }\r\n" +
+                "    ]\r\n" +
+                "  }\r\n" +
+                "}";
+        return jarJson;
     }
 }

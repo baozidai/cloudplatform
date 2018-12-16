@@ -176,4 +176,25 @@ public class ProjectController {
             return mv;
         }
     }
+
+    /**
+     * 用户跳转到单个net容器上传项目的界面
+     *
+     * @param session session
+     * @return ModelAndView
+     */
+    @ApiOperation(value = "用户跳转到单个net容器上传项目的界面")
+    @GetMapping(value = "/jar_upload_file")
+    public ModelAndView jarFileUpload(HttpSession session) {
+        String roleName1 = "用户";
+        String rN = (String) session.getAttribute("roleName");
+        ModelAndView mv = new ModelAndView();
+        if( roleName1.equals(rN)){
+            mv.setViewName("jarFileUpload");
+            return mv;
+        }else{
+            mv.setViewName("../404");
+            return mv;
+        }
+    }
 }

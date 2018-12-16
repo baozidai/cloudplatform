@@ -27,7 +27,12 @@ public enum PodTypeEnums {
     /**
      * .netWeb类型
      */
-    NET(4,"net")
+    NET(4,"net"),
+
+    /**
+     * jar类型
+     */
+    JAR(5,"jar"),
     ;
 
     /**

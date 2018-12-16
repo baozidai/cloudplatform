@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="/assets/js/layer-v3.1.0/layer/theme/default/layer.css">
 
     <script src="/assets/js/jquery-1.11.1.min.js"></script>
+    <script src = /assets/js/ajax.js></script>
     <script src="/assets/js/layer-v3.1.0/layer/layer.js"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -174,7 +175,7 @@
 
             <ol class="breadcrumb bc-1">
                 <li>
-                    <a href="/user_list"><i class="fa-home"></i>返回用户列表</a>
+                    <a href="/users/user_list"><i class="fa-home"></i>返回用户列表</a>
                 </li>
                 <li class="active">
                     <strong>容器列表</strong>
@@ -277,6 +278,122 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-sm-10 col-sm-offset-1">
+                <div class="chart-item-bg">
+                    <div class="panel-body">
+                        <div style="margin-bottom: 15px">
+                            <div class="h3 text-secondary text-bold">JAR容器列表<span style="margin-left: 5px"
+                                                                                  class="text-medium text-muted">Programme List</span>
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+
+                            jQuery(document).ready(function ($) {
+                                var userId = getUserIdSession();
+                                var selected = [];
+                                $("#example-6").dataTable({
+                                    //                                             "data": dataSet.data,//数据源
+                                    "sDom": '<"top"f>t<"bottom"pi>',
+                                    "bSort": false, //排序功能
+                                    "pageLength": 9,
+                                    //                                    searching: false,
+                                    "ajax": {
+                                        "url": "/pods/users/"+ userId,
+                                        "dataType": "json",
+                                        "method": "GET",
+                                        "data":{
+                                            podType: 5
+                                        },
+                                        "dataSrc":
+                                            function (result) {
+                                                return result.extend;//自定义数据源，默认为data
+                                            },
+                                    },
+                                    "columns": [
+                                        {
+                                            "data": "podName",
+                                            "title": "容器名称"
+                                        },
+                                        {
+                                            "data": "name",
+                                            "title": "名称"
+                                        },
+                                        {
+                                            "data": "ipPort",
+                                            "title": "链接地址",
+                                            render: function (data, type, row) {
+                                                return '<a style="color:#6699cc;text-decoration: underline" href="http://' + data + '" target="_blank">' + data + '</a>';
+                                            }
+                                        },
+                                        {
+                                            "data": "image",
+                                            "title": "镜像"
+                                        }
+                                    ],
+                                    language: {
+                                        "sProcessing": "处理中...",
+                                        "sLengthMenu": "显示 _MENU_ 项结果",
+                                        "sZeroRecords": "没有匹配结果",
+                                        "sInfo": " 共 _TOTAL_ 项",
+                                        "sInfoEmpty": " 共 0 项",
+                                        "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                                        "sInfoPostFix": "",
+                                        "sSearch": "搜索:",
+                                        "sUrl": "",
+                                        "sEmptyTable": "表中数据为空",
+                                        "sLoadingRecords": "载入中...",
+                                        "sInfoThousands": ",",
+                                        "oPaginate": {
+                                            "sFirst": "首页",
+                                            "sPrevious": "<",
+                                            "sNext": ">",
+                                            "sLast": "末页"
+                                        },
+                                        "oAria": {
+                                            "sSortAscending": ": 以升序排列此列",
+                                            "sSortDescending": ": 以降序排列此列"
+                                        }
+                                    }
+                                });
+
+
+                            });
+                        </script>
+                        <script type="text/javascript">
+                            jQuery(document).ready(function ($) {
+
+                                // Realtime Network Stats
+                                var i = 0,
+                                    rns_values = [130, 150],
+                                    rns2_values = [39, 50],
+                                    realtime_network_stats = [];
+
+                                for (i = 0; i <= 100; i++) {
+                                    realtime_network_stats.push({
+                                        id: i,
+                                        x1: between(rns_values[0], rns_values[1]),
+                                        x2: between(rns2_values[0], rns2_values[1])
+                                    });
+                                }
+
+
+                                function between(randNumMin, randNumMax) {
+                                    var randInt = Math.floor((Math.random() * ((randNumMax + 1) - randNumMin)) + randNumMin);
+
+                                    return randInt;
+                                }
+                            });
+                        </script>
+                        <div class="table-responsive" style="border: none">
+                            <table width="100%" class="table table-bordered table-striped" id="example-6">
+                                <tbody class="middle-align"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="row">
             <div class="col-sm-10 col-sm-offset-1">
@@ -370,7 +487,6 @@
                 </div>
             </div>
         </div>
-
 
         <div class="row">
             <div class="col-sm-10 col-sm-offset-1">
@@ -488,7 +604,6 @@
                 </div>
             </div>
         </div>
-
 
         <div class="row">
             <div class="col-sm-10 col-sm-offset-1">

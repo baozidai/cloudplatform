@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 /**
  * @author Ernest
@@ -35,9 +36,13 @@ public class LoginInterceptor implements HandlerInterceptor {
         // TODO Auto-generated method stub
         HttpSession session = request.getSession(false);
         String userId = "userId";
+        response.setDateHeader("expires", -1);
+        response.setHeader("Cache-Control", "no-cache");
+        response.setHeader("Pragma", "no-cache");
         if((session==null)) {
             logger.info("未登录，session为空，不放行");
-            response.sendRedirect(request.getContextPath()+"/");
+            response.setHeader("sessionStatus","nosession");
+            response.sendRedirect(request.getContextPath()+"/index.html");
             return false;
         }
         else {
@@ -46,7 +51,8 @@ public class LoginInterceptor implements HandlerInterceptor {
                 return true;
             }
             logger.info("登录失效，不放行");
-            response.sendRedirect(request.getContextPath()+"/");
+            response.setHeader("sessionStatus","timeout");
+            response.sendRedirect(request.getContextPath()+"/index.html");
             return false;
         }
 

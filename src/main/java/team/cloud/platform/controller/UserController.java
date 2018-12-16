@@ -12,6 +12,7 @@ import team.cloud.platform.exception.CommonException;
 import team.cloud.platform.service.UserService;
 import team.cloud.platform.utils.web.ResultUtil;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -131,12 +132,13 @@ public class UserController {
     /**
      * 获取user session
      *
-     * @param session session
+     * @param request request
      * @return 结果集
      */
     @ApiOperation(value = "获取user session")
     @GetMapping(value = "/session")
-    public Result sessionUser(HttpSession session){
+    public Result sessionUser(HttpServletRequest request){
+        HttpSession session = request.getSession(false);
         User user = (User) session.getAttribute("user");
         return ResultUtil.success(ResultEnums.COMMON_SUCCESS,user);
     }
@@ -177,7 +179,7 @@ public class UserController {
     public ModelAndView logout(HttpSession session) {
         // 清除session
         session.invalidate();
-        return new ModelAndView("");
+        return new ModelAndView("redirect:/index.html");
     }
 
     /**
@@ -239,12 +241,13 @@ public class UserController {
     /**
      * 管理员获取userId session
      *
-     * @param session session
+     * @param request request
      * @return 结果集
      */
     @ApiOperation(value = "管理员获取userId")
     @GetMapping(value = "/session/admin/userId")
-    public Result sessionUserId(HttpSession session){
+    public Result sessionUserId(HttpServletRequest request){
+        HttpSession session = request.getSession(false);
         Integer userId = (Integer) session.getAttribute("adminGetUserId");
         return ResultUtil.success(ResultEnums.COMMON_SUCCESS,userId);
     }
